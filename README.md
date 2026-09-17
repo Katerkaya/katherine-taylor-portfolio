@@ -20,6 +20,7 @@ Everything is set in one list near the bottom of `index.html`. Search for `YOUR 
 - **start / end:** the seconds that loop behind the hero (`0` = beginning / end).
 - **shape:** `'wide'`, `'square'` or `'tall'`. Square and tall videos are shown whole in the hero.
 - **image:** a photo in the `images` folder, used on the tile and while the hero video loads.
+- **imageMobile / imagePosition / poster:** optional taller phone image, crop focus point for the tile, and a still for the case-study player.
 - **SLIDE_SECONDS**, just below the list, sets how long each hero slide stays up.
 
 Current setup:
@@ -28,13 +29,22 @@ Current setup:
 |---|---------|--------|
 | 1 | K-Pop Demon Hunters × Anua | YouTube |
 | 2 | Create 100 | `videos/create-100.mp4` (hero: `create-100-loop.mp4`, a footage-only cut) |
-| 3 | Munchlings × Primark | `videos/munchlings.mp4` (hero: `munchlings-loop.mp4`, square) |
-| 4 | Westin — Own Your Mornings | YouTube |
+| 3 | Disney Munchlings × Primark | `videos/munchlings-reel.mp4` (hero: `munchlings-reel-loop.mp4`, tall); `munchlings-square.mp4` plays in the gallery |
+| 4 | Westin — Own Your Mornings | YouTube (hero loop, seconds 2–24, and the case-study film); link to the film on LBB |
 
 Notes:
 - YouTube videos must allow embedding, otherwise the thumbnail shows instead.
 - Background videos don't play when the site is opened straight from your computer (YouTube), or
   when visitors have "reduce motion" or data saver switched on. The image or thumbnail shows instead.
+
+## Case study pages (Create 100, Munchlings, Westin)
+
+The case study (`<section class="case" id="project-02">`) has extra sections: a numbers strip, the case study
+text, an auto-scrolling **gallery** (images in `images/create-100/`), a **featuring** list and **in the press** links.
+
+- **Your role:** the four rows under the case study text (`case-roles`) describe what you did.
+- **Gallery:** each image is a `<figure>` inside `marquee-track`. Add or remove figures; the loop adjusts itself.
+  Hovering pauses it.
 
 ## Other edits
 

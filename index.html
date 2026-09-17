@@ -55,7 +55,7 @@ a{color:inherit;text-decoration:none}
 .hero-slide:nth-child(5){background:radial-gradient(circle at 30% 50%,#c68167 0,#59413b 30%,#111 72%)}
 .hero-slide:nth-child(6){background:radial-gradient(circle at 65% 40%,#728ca0 0,#394650 30%,#111 72%)}
 /* Thumbnail or photo, shown while the video loads (or if it can't play). */
-.hero-poster{position:absolute;inset:0;z-index:1;background-size:cover;background-position:center}
+.hero-poster{position:absolute;inset:0;z-index:1;background-image:var(--img);background-size:cover;background-position:center}
 /* Background YouTube player: sized to cover the hero, with extra height so YouTube's title bar is cropped off. */
 .hero-yt{position:absolute;z-index:2;top:50%;left:50%;height:calc(max(100cqh,56.25cqw) + 120px);aspect-ratio:16/9;transform:translate(-50%,-50%);opacity:0;transition:opacity .8s ease;pointer-events:none}
 .hero-yt.is-playing{opacity:1}
@@ -95,6 +95,7 @@ a{color:inherit;text-decoration:none}
 .project-image:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(16,17,18,.94) 0%,rgba(16,17,18,.82) 22%,rgba(16,17,18,.45) 42%,rgba(16,17,18,0) 62%),linear-gradient(180deg,rgba(0,0,0,0) 60%,rgba(0,0,0,.2))}
 .project-media{position:absolute;inset:0;background-position:center;background-size:cover;background-repeat:no-repeat;transition:transform 1.2s cubic-bezier(.2,.7,.2,1),filter 1.2s}
 .project:hover .project-media{transform:scale(1.035);filter:brightness(1.16)}
+.project-media.has-img{background-image:var(--img);background-size:cover;background-position:var(--img-pos,center 28%)}
 
 /* Project tiles — these gradients show until a YouTube thumbnail or photo is set in PROJECTS near the bottom. */
 .project-01{background:var(--fallback-01)}
@@ -134,7 +135,45 @@ a{color:inherit;text-decoration:none}
 .case-info div{display:flex;flex-direction:column;gap:12px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--muted)}
 .case-info strong{color:var(--ink)}
 .case-info p{margin:0;font-size:22px;font-weight:700;letter-spacing:-.02em}
-.case-body{display:grid;grid-template-columns:1fr 2fr;gap:8vw;padding:90px var(--gutter) 150px}
+.case::after{content:"";display:block;height:60px}
+.case-body{display:grid;grid-template-columns:1fr 2fr;gap:8vw;padding:90px var(--gutter)}
+.case-text p + p{margin-top:24px}
+.case-text p.lead{color:var(--ink);font-size:28px;letter-spacing:-.02em;line-height:1.2}
+.case-roles{margin-top:44px;border-top:1px solid var(--line);max-width:700px}
+.case-roles div{display:grid;grid-template-columns:170px 1fr;gap:24px;padding:22px 0;border-bottom:1px solid var(--line)}
+.case-roles h3{margin:0;padding-top:6px;font-size:10px;line-height:1.5;letter-spacing:.14em;text-transform:uppercase;font-weight:900}
+.case-body .case-roles p{margin:0;font-size:19px;line-height:1.4}
+.case-link{display:inline-block;margin-top:40px;font-size:11px;font-weight:900;letter-spacing:.13em;border-bottom:2px solid currentColor;padding-bottom:8px}
+/* Big numbers strip */
+.case-facts{display:grid;grid-template-columns:repeat(3,1fr);margin:0 var(--gutter);border-bottom:1px solid var(--line)}
+.case-facts div{padding:40px 3vw 34px;border-left:1px solid var(--line)}
+.case-facts div:first-child{padding-left:0;border-left:0}
+.case-facts.is-two{grid-template-columns:repeat(2,1fr)}
+.case-facts.is-two span{max-width:380px}
+.case-facts strong{display:block;font-size:clamp(56px,7vw,110px);line-height:.85;letter-spacing:-.06em;font-weight:900}
+.case-facts span{display:block;margin-top:14px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--muted)}
+/* Label-left sections: featuring, press */
+.case-section{display:grid;grid-template-columns:1fr 2fr;gap:8vw;padding:0 var(--gutter) 90px}
+.case-names{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;font-size:clamp(28px,3.2vw,46px);font-weight:900;letter-spacing:-.04em;line-height:1.1;text-transform:uppercase}
+.case-names li:not(:last-child)::after{content:"·";margin:0 .3em;color:var(--muted);font-weight:300}
+.case-names-note{margin:20px 0 0;max-width:560px;font-size:10px;line-height:1.6;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--muted)}
+.case-press{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.case-press a{display:grid;grid-template-columns:170px 1fr auto;gap:24px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--line)}
+.case-press .src{font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:900}
+.case-press .title{font-size:20px;letter-spacing:-.01em;color:#c6c2b9;transition:color .2s}
+.case-press .date{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.case-press .date::after{content:" ↗";font-size:12px;color:var(--ink)}
+.case-press a:hover .title,.case-press a:focus-visible .title{color:var(--ink)}
+/* Auto-scrolling image panel */
+.case-gallery{padding:0 0 90px}
+.case-gallery .case-label{padding:0 var(--gutter) 26px}
+.marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.marquee-track{display:flex;width:max-content;animation:marquee var(--marquee-duration,40s) linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+.marquee figure{flex:none;margin:0 16px 0 0}
+.marquee img,.marquee video{display:block;height:420px;width:auto;background:var(--tile)}
+.marquee figcaption{margin-top:12px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--muted)}
+@keyframes marquee{to{transform:translateX(-50%)}}
 .case-label{font-size:10px;letter-spacing:.13em;text-transform:uppercase;font-weight:900}
 .case-body p{margin:0;max-width:700px;font-size:22px;color:#c6c2b9}
 
@@ -178,7 +217,22 @@ a{color:inherit;text-decoration:none}
   .case-hero.case-video.is-tall{height:min(80vh,150vw)}
   .case-hero.case-video.is-square{height:auto;width:auto;margin-left:var(--gutter);margin-right:var(--gutter)}
   .case-info,.case-body{display:block}
-  .case-body{padding:70px var(--gutter) 100px}
+  .case-body{padding:60px var(--gutter)}
+  .case-text p.lead{font-size:22px}
+  .case-roles div{grid-template-columns:1fr;gap:8px;padding:18px 0}
+  .case-roles h3{padding-top:0}
+  .case-body .case-roles p{margin:0;font-size:17px}
+  .case-facts,.case-facts.is-two{grid-template-columns:1fr}
+  .case-facts div,.case-facts div:first-child{padding:26px 0;border-left:0;border-top:1px solid var(--line)}
+  .case-facts div:first-child{border-top:0}
+  .case-section{display:block;padding:0 var(--gutter) 60px}
+  .case-section .case-label{margin-bottom:22px}
+  .case-press a{grid-template-columns:1fr;gap:6px;padding:18px 0}
+  .case-press .title{font-size:18px}
+  .case-gallery{padding-bottom:60px}
+  .marquee img,.marquee video{height:260px}
+  .project-media.has-img{background-image:var(--img-m,var(--img))}
+  .hero-poster{background-image:var(--img-m,var(--img))}
   .case-info p,.case-body p{font-size:18px;margin-top:25px}
 
   .footer{display:block;padding:20px var(--gutter)}
@@ -190,6 +244,8 @@ a{color:inherit;text-decoration:none}
   html{scroll-behavior:auto}
   .hero-slide,.hero-progress i{transition:none}
   .project-media{transition:none}
+  .marquee{overflow-x:auto;-webkit-mask-image:none;mask-image:none}
+  .marquee-track{animation:none}
   .project:hover .project-media{transform:none}
 }
 </style>
@@ -228,7 +284,7 @@ a{color:inherit;text-decoration:none}
   <a class="project" href="#project-02">
     <div class="project-side">
       <span class="project-no">02</span>
-      <div class="project-meta"><span>CREATIVE / CAMPAIGN</span><span>THE WALT DISNEY COMPANY · 2025</span></div>
+      <div class="project-meta"><span>POST-PRODUCTION / VIDEO SERIES</span><span>THE WALT DISNEY COMPANY · 2023</span></div>
       <h3 class="project-title">CREATE 100</h3>
       <div class="project-cta">VIEW PROJECT</div>
     </div>
@@ -238,8 +294,8 @@ a{color:inherit;text-decoration:none}
   <a class="project" href="#project-03">
     <div class="project-side">
       <span class="project-no">03</span>
-      <div class="project-meta"><span>CREATIVE / CAMPAIGN</span><span>THE WALT DISNEY COMPANY · 2025</span></div>
-      <h3 class="project-title">MUNCHLINGS × PRIMARK</h3>
+      <div class="project-meta"><span>CREATIVE / CAMPAIGN</span><span>THE WALT DISNEY COMPANY · 2023</span></div>
+      <h3 class="project-title">DISNEY MUNCHLINGS × PRIMARK</h3>
       <div class="project-cta">VIEW PROJECT</div>
     </div>
     <div class="project-image"><div class="project-media project-03" aria-hidden="true"></div></div>
@@ -302,7 +358,7 @@ a{color:inherit;text-decoration:none}
   </div>
   <div class="case-info">
     <div><span>BBH Singapore · 2026</span><strong>MY ROLE</strong></div>
-    <p>Social ideation · Creative ideation · Copywriting · Influencer research</p>
+    <p>Social Ideation · Creative Ideation · Copywriting · Influencer Research</p>
   </div>
   <div class="case-body">
     <div class="case-label">CASE STUDY</div>
@@ -311,36 +367,122 @@ a{color:inherit;text-decoration:none}
 </section>
 
 <section class="case" id="project-02" role="dialog" aria-modal="true" aria-labelledby="case-02-title">
-  <div class="case-top"><span>02 / CREATIVE / CAMPAIGN</span><a href="#work" class="case-close">BACK TO WORK ↑</a></div>
+  <div class="case-top"><span>02 / POST-PRODUCTION / VIDEO SERIES</span><a href="#work" class="case-close">BACK TO WORK ↑</a></div>
   <h1 id="case-02-title">CREATE 100</h1>
   <div class="case-hero case-video" data-project="2">
     <iframe title="Create 100 video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     <div class="case-placeholder">DISNEY / CAMPAIGN</div>
   </div>
   <div class="case-info">
-    <div><span>Selected work</span><strong>MY ROLE</strong></div>
-    <p>Creative / Campaign</p>
+    <div><span>The Walt Disney Company · 2023</span><strong>MY ROLE</strong></div>
+    <p>Creative · Production · Localisation</p>
   </div>
+  <div class="case-facts">
+    <div><strong>100</strong><span>One-of-a-kind pieces &amp; experiences</span></div>
+    <div><strong>18</strong><span>Countries in the global auction</span></div>
+    <div><strong>$1M</strong><span>Donated by Disney to Make-A-Wish</span></div>
+  </div>
+
   <div class="case-body">
     <div class="case-label">CASE STUDY</div>
-    <p>Project narrative, thinking, process and selected work will live here. The final version will use the real campaign assets and clearly separate Katherine's contribution from the final campaign.</p>
+    <div class="case-text">
+      <p class="lead">Behind every Create 100 piece was a personal story: the Disney moment that first sparked a designer, a musician or an artist. The films set out to capture it, from first inspiration to finished piece.</p>
+      <p>Created to mark 100 years of Disney storytelling, the campaign brought together names across music, film, fashion and art, with every piece auctioned for Make-A-Wish and Disney opening with a $1 million donation. More than 200 films carried those stories to audiences on social and on Disney Style’s YouTube channel.</p>
+      <div class="case-roles">
+        <div><h3>Creative</h3><p>Helping shape each contributor’s story, building the structure of every film around their creative journey, from the first spark of inspiration through development to the finished piece.</p></div>
+        <div><h3>Production</h3><p>Managing and coordinating post-production across all 200+ films, overseeing the visual effects and audio mix so every story felt unmistakably Disney.</p></div>
+        <div><h3>Localisation</h3><p>Translating content spoken in Mandarin Chinese, so these stories could travel beyond the language they were told in.</p></div>
+        <div><h3>Deliverables</h3><p>Over 200 films delivered for social and YouTube.</p></div>
+      </div>
+      <a class="case-link" href="https://www.youtube.com/playlist?list=PLGiIpHsC_IDTter789lUzOcz8CDlhV0Zv" target="_blank" rel="noopener">WATCH THE SERIES ON YOUTUBE ↗</a>
+    </div>
+  </div>
+
+  <div class="case-gallery">
+    <div class="case-label">GALLERY</div>
+    <div class="marquee">
+      <div class="marquee-track">
+        <figure><img src="images/create-100/tommy-hilfiger.jpg" width="600" height="600" loading="lazy" alt="Tommy Hilfiger with his Disney varsity jacket for Create 100"><figcaption>Tommy Hilfiger · Disney varsity jacket</figcaption></figure>
+        <figure><img src="images/create-100/nigo-yoda.jpg" width="672" height="840" loading="lazy" alt="NIGO with his life-size papier-mâché Yoda"><figcaption>NIGO® · Life-size papier-mâché Yoda</figcaption></figure>
+        <figure><img src="images/create-100/sabyasachi.jpg" width="1280" height="720" loading="lazy" alt="Artisans embroidering Sabyasachi’s Namaste Mickey artwork"><figcaption>Sabyasachi · Namaste Mickey</figcaption></figure>
+        <figure><img src="images/create-100/mulan-painting.jpg" width="1280" height="720" loading="lazy" alt="An artist presenting a Mulan-inspired painting"><figcaption>Inspired by Mulan</figcaption></figure>
+        <figure><img src="images/create-100/verdy.jpg" width="686" height="386" loading="lazy" alt="VERDY’s Create 100 artwork"><figcaption>VERDY</figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  <div class="case-section">
+    <div class="case-label">FEATURING</div>
+    <div>
+      <ul class="case-names">
+        <li>Beyoncé</li><li>Tommy Hilfiger</li><li>Lang Lang</li><li>Sabyasachi</li><li>NIGO®</li><li>Roy Wang</li><li>Christian Louboutin</li><li>Vik Muniz</li><li>VERDY</li><li>Charlie Kirihara</li><li>Aliyah Salmon</li>
+      </ul>
+      <p class="case-names-note">With Kevin Feige, Jennifer Lee and Jon Landau representing Marvel Studios, Walt Disney Animation Studios and Lightstorm Entertainment</p>
+    </div>
+  </div>
+
+  <div class="case-section">
+    <div class="case-label">IN THE PRESS</div>
+    <ul class="case-press">
+      <li><a href="https://thewaltdisneycompany.com/news/disney-launches-global-create-100-campaign-to-celebrate-creativity-and-support-make-a-wish-with-1-million-donation/" target="_blank" rel="noopener"><span class="src">The Walt Disney Company</span><span class="title">Create 100 launches with a $1 million donation to Make-A-Wish</span><span class="date">Jul 2023</span></a></li>
+      <li><a href="https://www.prnewswire.com/news-releases/own-a-piece-of-disney-storytelling-as-create-100-auction-goes-live-featuring-unique-items-from-nigo-cactus-plant-flea-market-charlotte-tilbury-vik-muniz-maison-valentino-christian-louboutin-tommy-hilfiger-the-iconic-black-301954480.html" target="_blank" rel="noopener"><span class="src">PR Newswire</span><span class="title">The Create 100 auction goes live across 18 countries</span><span class="date">Oct 2023</span></a></li>
+      <li><a href="https://wwd.com/pop-culture/culture-news/gallery/disney-create-100-auction-photos-1235869201/disney-create-100-auction-photos-a/" target="_blank" rel="noopener"><span class="src">WWD</span><span class="title">The Create 100 auction pieces, in pictures</span><span class="date">Oct 2023</span></a></li>
+      <li><a href="https://robbreport.com/shelter/art-collectibles/disney-designer-auction-make-a-wish-1235348001/" target="_blank" rel="noopener"><span class="src">Robb Report</span><span class="title">Inside the auction’s top lots, from Schiaparelli to Sabyasachi</span><span class="date">Oct 2023</span></a></li>
+      <li><a href="https://news.artnet.com/market/disney-100-auction-2383939" target="_blank" rel="noopener"><span class="src">Artnet News</span><span class="title">Disney’s centennial auction of 100 designer objects</span><span class="date">Oct 2023</span></a></li>
+      <li><a href="https://highsnobiety.com/p/cpfm-marc-jacobs-disney-create-100" target="_blank" rel="noopener"><span class="src">Highsnobiety</span><span class="title">The Create 100 roster, from NIGO® to Cactus Plant Flea Market</span><span class="date">2023</span></a></li>
+    </ul>
   </div>
 </section>
 
 <section class="case" id="project-03" role="dialog" aria-modal="true" aria-labelledby="case-03-title">
   <div class="case-top"><span>03 / CREATIVE / CAMPAIGN</span><a href="#work" class="case-close">BACK TO WORK ↑</a></div>
-  <h1 id="case-03-title">MUNCHLINGS × PRIMARK</h1>
+  <h1 id="case-03-title">DISNEY MUNCHLINGS × PRIMARK</h1>
   <div class="case-hero case-video" data-project="3">
-    <iframe title="Munchlings × Primark video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    <div class="case-placeholder">DISNEY / CAMPAIGN</div>
+    <iframe title="Disney Munchlings × Primark video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <div class="case-placeholder">MUNCHLINGS / PRIMARK</div>
   </div>
   <div class="case-info">
-    <div><span>Selected work</span><strong>MY ROLE</strong></div>
-    <p>Creative / Campaign</p>
+    <div><span>Primark × Disney · 2023</span><strong>MY ROLE</strong></div>
+    <p>Creative Direction · Storyboarding · Set Design</p>
   </div>
+
   <div class="case-body">
     <div class="case-label">CASE STUDY</div>
-    <p>Project narrative, thinking, process and selected work will live here. The final version will use the real campaign assets and clearly separate Katherine's contribution from the final campaign.</p>
+    <div class="case-text">
+      <p class="lead">Munchlings reimagine beloved Disney characters as bite-sized treats. For their arrival at Primark, the goal was to show off just how cute and playful the new plush range could be.</p>
+      <p>Stop motion brought the toys to life. From Pancake Minnie’s graceful somersaults to Fruit Cup Tigger’s energetic bounces, every movement was designed to let each character’s personality shine through, while hinting at the treat they’re made from.</p>
+      <div class="case-roles">
+        <div><h3>Creative direction</h3><p>Co-leading the creative direction, from the first concepts through to developing the chosen route.</p></div>
+        <div><h3>Storyboarding</h3><p>Mapping out each character’s story through movement, inspired by both the food they represent and their individual personality.</p></div>
+        <div><h3>Set design</h3><p>Directing the set design, from the colour palettes and patterns to every prop on the table.</p></div>
+        <div><h3>Stop motion</h3><p>Collaborating on set with the stop-motion team at Picturesmith to bring the vibrant toys to life.</p></div>
+        <div><h3>Deliverables</h3><p>Instagram Reels and Stories, featured on Primark Home’s Instagram.</p></div>
+      </div>
+      <a class="case-link" href="https://www.instagram.com/reel/C5yK3WIMpVH/" target="_blank" rel="noopener">WATCH ON INSTAGRAM ↗</a>
+    </div>
+  </div>
+
+  <div class="case-gallery">
+    <div class="case-label">GALLERY</div>
+    <div class="marquee">
+      <div class="marquee-track">
+        <figure><img src="images/munchlings/scone-simba.jpg" width="840" height="840" loading="lazy" alt="Scone Simba plush suspended above a plate, with scones and jam on the table"><figcaption>Scone Simba</figcaption></figure>
+        <figure><img src="images/munchlings/stitch.jpg" width="840" height="840" loading="lazy" alt="Cupcake Stitch plush on a piping bag, surrounded by berries and sprinkles"><figcaption>Cupcake Stitch</figcaption></figure>
+        <figure><video src="videos/munchlings-square.mp4" poster="images/munchlings/square-poster.jpg" width="720" height="720" muted loop playsinline preload="none" aria-label="The 1:1 Munchlings reel"></video><figcaption>The 1:1 reel</figcaption></figure>
+        <figure><img src="images/munchlings/pancake-minnie.jpg" width="840" height="840" loading="lazy" alt="Pancake Minnie plush on a plate beside a stack of pancakes and strawberries"><figcaption>Pancake Minnie</figcaption></figure>
+        <figure><img src="images/munchlings/group.jpg" width="436" height="840" loading="lazy" alt="Fruit Cup Tigger, Pancake Minnie, Scone Simba, Macaroon Marie and Cupcake Stitch on a cake stand"><figcaption>The full range</figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  <div class="case-section">
+    <div class="case-label">THE CHARACTERS</div>
+    <div>
+      <ul class="case-names">
+        <li>Pancake Minnie</li><li>Fruit Cup Tigger</li><li>Scone Simba</li><li>Cupcake Stitch</li><li>Macaroon Marie</li>
+      </ul>
+      <p class="case-names-note">Stop motion in collaboration with Picturesmith</p>
+    </div>
   </div>
 </section>
 
@@ -348,16 +490,52 @@ a{color:inherit;text-decoration:none}
   <div class="case-top"><span>04 / ACCOUNT EXECUTIVE</span><a href="#work" class="case-close">BACK TO WORK ↑</a></div>
   <h1 id="case-04-title">WESTIN — OWN YOUR MORNINGS</h1>
   <div class="case-hero case-video" data-project="4">
-    <iframe title="Westin — Own Your Mornings video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe title="Westin — Own Your Mornings film" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     <div class="case-placeholder">WESTIN / CAMPAIGN</div>
   </div>
   <div class="case-info">
     <div><span>BBH Singapore · 2026</span><strong>MY ROLE</strong></div>
-    <p>Account Executive · Client / team collaboration · Campaign delivery</p>
+    <p>Cross-Functional Leadership · Client Collaboration · Campaign Delivery</p>
   </div>
+  <div class="case-facts is-two">
+    <div><strong>3</strong><span>Market rollouts: India, Japan and APEC</span></div>
+    <div><strong>100+</strong><span>Deliverables spanning social, Spotify and out-of-home in Japan, India and Singapore</span></div>
+  </div>
+
   <div class="case-body">
     <div class="case-label">CASE STUDY</div>
-    <p>Project narrative, thinking, process and selected work will live here. The final version will use the real campaign assets and clearly separate Katherine's contribution from the final campaign.</p>
+    <div class="case-text">
+      <p class="lead">Sleep isn’t passive, it’s power. Own Your Mornings gave Westin Hotels &amp; Resorts a bold new point of view: true restoration is what gives guests the power to take on their day.</p>
+      <p>Carrying that idea from brief to launch meant steering the whole process: building timelines, bringing creative and production teams together, and keeping the client close at every step, so a campaign centred on the Heavenly Bed and Westin’s sleep rituals landed exactly as intended.</p>
+      <p>The anthem film shows a family owning their morning, with a bold voiceover set against gentle, sunlit moments. From there, the work was adapted for every channel and market, from the hero film and its shorter cuts to print and in-hotel TV, and rolled out across India, Japan and APEC in more than 100 deliverables.</p>
+      <div class="case-roles">
+        <div><h3>Cross-functional leadership</h3><p>Overseeing the whole campaign process and keeping every team aligned, from the first brief through production to delivery.</p></div>
+        <div><h3>Client collaboration</h3><p>Partnering closely with the client’s brand team, so the work stayed true to its ambition at every stage.</p></div>
+        <div><h3>Campaign delivery</h3><p>Bringing the rollout to life in India, Japan and APEC, adapting the work for each market and channel.</p></div>
+        <div><h3>Deliverables</h3><p>Over 100 assets spanning social, Spotify and out-of-home in Japan, India and Singapore.</p></div>
+      </div>
+      <a class="case-link" href="https://lbbonline.com/work/177518" target="_blank" rel="noopener">WATCH THE FILM ON LBB ↗</a>
+    </div>
+  </div>
+
+  <div class="case-gallery">
+    <div class="case-label">GALLERY</div>
+    <div class="marquee">
+      <div class="marquee-track" data-seconds="20">
+        <figure><img src="images/westin/wind-down-gear-up.jpg" width="1494" height="840" loading="lazy" alt="Own Your Mornings print: Wind down, Gear up"><figcaption>Wind down · Gear up</figcaption></figure>
+        <figure><img src="images/westin/reset-refuel.jpg" width="1501" height="840" loading="lazy" alt="Own Your Mornings print: Reset, Refuel"><figcaption>Reset · Refuel</figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  <div class="case-section">
+    <div class="case-label">IN THE PRESS</div>
+    <ul class="case-press">
+      <li><a href="https://lbbonline.com/news/Westin-Hotels-and-Resorts-Sleep-Own-Your-Mornings-BBH-Singapore" target="_blank" rel="noopener"><span class="src">Little Black Book</span><span class="title">Westin reclaims sleep as a source of power</span><span class="date">Aug 2026</span></a></li>
+      <li><a href="https://www.marketing-interactive.com/westin-turns-a-good-nights-sleep-into-a-power-move" target="_blank" rel="noopener"><span class="src">Marketing-Interactive</span><span class="title">How a good night’s sleep became a power move</span><span class="date">Aug 2026</span></a></li>
+      <li><a href="https://marketech-apac.com/westin-hotels-resorts-positions-sleep-as-a-source-of-power-in-own-your-mornings-campaign/" target="_blank" rel="noopener"><span class="src">Marketech APAC</span><span class="title">Positioning restorative sleep as energy for the day ahead</span><span class="date">Aug 2026</span></a></li>
+      <li><a href="https://www.adsoftheworld.com/campaigns/own-your-mornings" target="_blank" rel="noopener"><span class="src">Ads of the World</span><span class="title">The Own Your Mornings campaign</span><span class="date">Aug 2026</span></a></li>
+    </ul>
   </div>
 </section>
 
@@ -406,6 +584,8 @@ a{color:inherit;text-decoration:none}
    video      OR a video file you've uploaded to the videos folder, e.g.
               'videos/my-film.mp4' (keep files under 25 MB). It plays with
               sound in the case study.
+   embed      Optional player link from another site (e.g. LBB) for the case
+              study. The hero still uses "youtube" or "heroVideo".
    heroVideo  Optional short, silent loop for the hero, e.g.
               'videos/my-film-loop.mp4'. If left empty, "video" is used.
    start/end  Which seconds loop behind the hero (0 = beginning / end).
@@ -414,6 +594,9 @@ a{color:inherit;text-decoration:none}
    image      Optional photo, e.g. 'images/westin.jpg'. Used on the project
               tile and while the hero video loads. For YouTube videos, the
               video's thumbnail is used when this is empty.
+   imageMobile    Optional taller version of the image for phones.
+   imagePosition  Optional focus point for the tile crop, e.g. 'center 30%'.
+   poster     Optional still for the case-study video player.
    title      The caption at the bottom-left of the hero.
 
    Projects are numbered in the order they appear on the page.
@@ -426,16 +609,27 @@ var PROJECTS = {
   2: { title: 'CREATE 100',
        youtube: '',
        video: 'videos/create-100.mp4', heroVideo: 'videos/create-100-loop.mp4',
-       start: 0, end: 0, shape: 'wide', image: 'images/create-100.jpg' },
+       start: 0, end: 0, shape: 'wide',
+       image: 'images/create-100.jpg',            // tile + hero, wide screens
+       imageMobile: 'images/create-100-tall.jpg', // tile + hero, phones
+       imagePosition: 'center 50%',
+       poster: 'images/create-100/poster.jpg' },  // still shown on the case-study player
 
-  3: { title: 'MUNCHLINGS × PRIMARK',
+  3: { title: 'DISNEY MUNCHLINGS × PRIMARK',
        youtube: '',
-       video: 'videos/munchlings.mp4', heroVideo: 'videos/munchlings-loop.mp4',
-       start: 0, end: 0, shape: 'square', image: 'images/munchlings.jpg' },
+       video: 'videos/munchlings-reel.mp4', heroVideo: 'videos/munchlings-reel-loop.mp4',
+       start: 0, end: 0, shape: 'tall',
+       image: 'images/munchlings.jpg',
+       imageMobile: 'images/munchlings-tall.jpg',
+       poster: 'images/munchlings/reel-poster.jpg' },
 
   4: { title: 'WESTIN — OWN YOUR MORNINGS',
-       youtube: 'https://www.youtube.com/watch?v=59156sZlc5A',
-       video: '', heroVideo: '', start: 0, end: 0, shape: 'wide', image: '' },
+       youtube: 'https://www.youtube.com/watch?v=59156sZlc5A',    // hero loop + case-study film
+       embed: '',
+       video: '', heroVideo: '', start: 2, end: 24, shape: 'wide',
+       image: 'images/westin.jpg',
+       imageMobile: 'images/westin-tall.jpg',
+       imagePosition: 'center 50%' },
 
   5: { title: 'THAI LIGHTS', youtube: '', video: '', heroVideo: '', start: 0, end: 0, shape: 'wide', image: '' },
   6: { title: 'PIVOTING',    youtube: '', video: '', heroVideo: '', start: 0, end: 0, shape: 'wide', image: '' }
@@ -467,29 +661,62 @@ function posterFor(p, cb){
   img.src = hi;
 }
 
-// Project tiles and case-study players.
+function setImage(el, url, mobileUrl){
+  el.style.setProperty('--img', 'url("' + url + '")');
+  if (mobileUrl) el.style.setProperty('--img-m', 'url("' + mobileUrl + '")');
+}
+
+// Project tiles, case-study players and image panels.
 (function(){
   document.querySelectorAll('.project-media').forEach(function(tile){
     var m = tile.className.match(/project-0(\d)/);
     if (!m) return;
-    posterFor(PROJECTS[m[1]], function(url){
-      tile.style.backgroundImage = 'url("' + url + '")';
-      tile.style.backgroundSize = 'cover';
-      tile.style.backgroundPosition = 'center 28%'; // faces usually sit in the upper part of the frame
+    var p = PROJECTS[m[1]];
+    posterFor(p, function(url){
+      setImage(tile, url, p.imageMobile);
+      if (p.imagePosition) tile.style.setProperty('--img-pos', p.imagePosition);
+      tile.classList.add('has-img');
     });
   });
+  // Image panels scroll on their own: the images are repeated once so the loop is seamless.
+  document.querySelectorAll('.marquee-track').forEach(function(track){
+    var originals = [].slice.call(track.children);
+    function setWidth(list){
+      return list.reduce(function(sum, el){
+        var m = el.querySelector('img, video');
+        var w = +m.getAttribute('width') || 1, h = +m.getAttribute('height') || 1;
+        return sum + 420 * w / h + 16;
+      }, 0);
+    }
+    function addCopies(list){
+      list.forEach(function(item){
+        var copy = item.cloneNode(true);
+        copy.setAttribute('aria-hidden', 'true');
+        track.appendChild(copy);
+      });
+    }
+    // Repeat short sets until one set is wider than the screen, then double it for a seamless loop.
+    var need = Math.max((window.screen && screen.width) || 0, window.innerWidth || 0) * 1.05;
+    var reps = 1;
+    while (setWidth(originals) * reps < need && reps < 8){ addCopies(originals); reps++; }
+    addCopies([].slice.call(track.children));
+    var base = +track.getAttribute('data-seconds') || originals.length * 8;
+    track.style.setProperty('--marquee-duration', (base * reps) + 's');
+    track.querySelectorAll('video').forEach(function(v){ v.muted = true; });
+  });
+
   document.querySelectorAll('.case-video[data-project]').forEach(function(box){
     var p = PROJECTS[box.getAttribute('data-project')];
     if (!p) return;
-    var shape = (p.video || p.id) ? p.shape : '';
+    var shape = (p.video || p.id || p.embed) ? p.shape : '';
     if (shape === 'tall' || shape === 'square') box.classList.add('is-' + shape);
-    if (p.video){
+    if (p.video && !p.embed){
       // Swap the YouTube frame for a video player with sound and controls.
       var v = document.createElement('video');
       v.controls = true;
       v.playsInline = true;
       v.preload = 'none';
-      if (p.image) v.poster = p.image;
+      if (p.poster || p.image) v.poster = p.poster || p.image;
       v.setAttribute('aria-label', box.querySelector('iframe').title);
       box.querySelector('iframe').replaceWith(v);
     } else if (!p.id && p.image){
@@ -530,6 +757,12 @@ function posterFor(p, cb){
 
   // The case-study player loads when its overlay opens and is removed on close, so the sound stops.
   function setVideos(panel, on){
+    // Gallery clips play only while their case study is open (and not with "reduce motion").
+    var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    panel.querySelectorAll('.marquee video').forEach(function(v){
+      if (on && !still){ var r = v.play(); if (r && r.catch) r.catch(function(){}); }
+      else v.pause();
+    });
     panel.querySelectorAll('.case-video[data-project]').forEach(function(box){
       var p = PROJECTS[box.getAttribute('data-project')] || {};
       var v = box.querySelector('video');
@@ -540,7 +773,9 @@ function posterFor(p, cb){
       }
       var f = box.querySelector('iframe');
       if (!f) return;
-      if (on && p.id){
+      if (on && p.embed){
+        if (!f.getAttribute('src')) f.setAttribute('src', p.embed);
+      } else if (on && p.id){
         if (!f.getAttribute('src')) f.setAttribute('src', 'https://www.youtube-nocookie.com/embed/' + p.id + '?rel=0&playsinline=1');
       } else {
         f.removeAttribute('src');
@@ -605,7 +840,7 @@ function posterFor(p, cb){
     posterFor(p, function(url){
       var d = document.createElement('div');
       d.className = 'hero-poster';
-      d.style.backgroundImage = 'url("' + url + '")';
+      setImage(d, url, p.imageMobile);
       slide.appendChild(d);
     });
   });
