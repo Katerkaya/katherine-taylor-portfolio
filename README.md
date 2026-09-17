@@ -4,32 +4,44 @@ A single-page static site. No build step, no dependencies.
 
 ```
 index.html        the whole site (HTML, CSS and JS in one file)
-images/           put your photos here
-  hero.jpg        hero slideshow + project 01 tile (also the video's fallback image)
-videos/           short, silent background clips
-  kpop-anua.mp4   hero slide 1
 404.html          shown for any address that doesn't exist
-_headers          security + caching headers for Cloudflare Pages
+images/           optional photos
+_headers          security + caching headers
 ```
 
-## Editing
+## Adding videos and photos
 
-- **Hero photo:** save it as `images/hero.jpg`. If you use a different name, change the `--hero-img` line near the top of `index.html`.
-- **Project tiles:** each tile is a `.project-0X` rule in the CSS. Replace the gradient with
-  `url('images/your-file.jpg') center/cover no-repeat`.
-- **Hero video:** save a short, silent MP4 (6–12 seconds, ideally under 5 MB; Cloudflare's hard limit is 25 MB per file)
-  as `videos/kpop-anua.mp4`. Until it's there, slide 1 shows `images/hero.jpg`.
-  Any other slide can get a video the same way: copy the `<video class="hero-video">` block into it.
-- **YouTube in a case study:** in `#project-01`, replace `YOUTUBE_VIDEO_ID` with the video's ID.
-  Add `is-vertical` to the class for Shorts. YouTube won't play when you open the file straight from your computer;
-  check it on the live site.
+Everything is set in one list near the bottom of `index.html`. Search for `YOUR VIDEOS AND PHOTOS`.
+
+- **youtube:** a YouTube link. It plays silently behind the hero, its thumbnail appears on the
+  project tile, and it plays with sound in the case study.
+- **video:** or a video file in the `videos` folder (under 25 MB), which plays with sound in the case study.
+- **heroVideo:** an optional short, silent loop for the hero. If empty, `video` is used.
+- **start / end:** the seconds that loop behind the hero (`0` = beginning / end).
+- **shape:** `'wide'`, `'square'` or `'tall'`. Square and tall videos are shown whole in the hero.
+- **image:** a photo in the `images` folder, used on the tile and while the hero video loads.
+- **SLIDE_SECONDS**, just below the list, sets how long each hero slide stays up.
+
+Current setup:
+
+| # | Project | Source |
+|---|---------|--------|
+| 1 | K-Pop Demon Hunters × Anua | YouTube |
+| 2 | Create 100 | `videos/create-100.mp4` (hero: `create-100-loop.mp4`, a footage-only cut) |
+| 3 | Munchlings × Primark | `videos/munchlings.mp4` (hero: `munchlings-loop.mp4`, square) |
+| 4 | Westin — Own Your Mornings | YouTube |
+
+Notes:
+- YouTube videos must allow embedding, otherwise the thumbnail shows instead.
+- Background videos don't play when the site is opened straight from your computer (YouTube), or
+  when visitors have "reduce motion" or data saver switched on. The image or thumbnail shows instead.
+
+## Other edits
+
 - **Email:** search for `hello@example.com` and replace it.
-- **Case studies:** each project's detail page is a `<section class="case" id="project-0X">` further down the file.
+- **Case study text:** each project's detail page is a `<section class="case" id="project-0X">`.
   Link straight to one with `yoursite.com/#project-03`.
 
 ## Deploying
 
-Hosted on Cloudflare Pages, connected to this GitHub repo.
-Every commit to `main` redeploys the site automatically in about a minute.
-
-Build settings: Framework preset **None**, build command **empty**, build output directory **/**.
+Connected to Cloudflare via GitHub. Every commit to `main` redeploys automatically.

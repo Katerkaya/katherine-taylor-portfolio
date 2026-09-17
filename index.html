@@ -20,9 +20,7 @@
   --tile:#242528;
   --sans:Arial,Helvetica,sans-serif;
   --gutter:3.05vw;
-  /* Your hero photo. Change this one line if you rename the file. */
-  --hero-img:url('images/hero.jpg');
-  /* Shown underneath the photo, so slide 1 and tile 1 still look finished before you add it. */
+  /* Shown until a video thumbnail or photo loads for project 1 (see PROJECTS near the bottom). */
   --fallback-01:radial-gradient(circle at 62% 40%,#a4557f 0,#3d2536 34%,#111 74%);
 }
 
@@ -47,23 +45,36 @@ a{color:inherit;text-decoration:none}
 /* ---------- Hero ---------- */
 .hero{height:690px;position:relative;overflow:hidden;background:#111}
 .hero-slideshow{position:absolute;inset:0;z-index:0}
-.hero-slide{position:absolute;inset:0;opacity:0;background-size:cover;background-position:center;transform:scale(1.01);animation:heroFade 30s infinite}
-.hero-slide:nth-child(1){opacity:1;background-image:linear-gradient(180deg,rgba(5,10,20,.05),rgba(5,5,10,.08) 55%,rgba(5,5,8,.48)),var(--hero-img),var(--fallback-01);animation-delay:0s}
-.hero-slide:nth-child(2){background:radial-gradient(circle at 68% 35%,#59486d 0,#282732 35%,#111 72%);animation-delay:5s}
-.hero-slide:nth-child(3){background:radial-gradient(circle at 30% 45%,#c79b6a 0,#554438 32%,#111 72%);animation-delay:10s}
-.hero-slide:nth-child(4){background:radial-gradient(circle at 72% 58%,#859487 0,#3d463d 30%,#111 72%);animation-delay:15s}
-.hero-slide:nth-child(5){background:radial-gradient(circle at 30% 50%,#c68167 0,#59413b 30%,#111 72%);animation-delay:20s}
-.hero-slide:nth-child(6){background:radial-gradient(circle at 65% 40%,#728ca0 0,#394650 30%,#111 72%);animation-delay:25s}
-.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.hero-slide:has(.hero-video)::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,10,20,.05),rgba(5,5,10,.08) 55%,rgba(5,5,8,.48))}
-@keyframes heroFade{0%,14%{opacity:1;transform:scale(1.01)}18%,100%{opacity:0;transform:scale(1.045)}}
+.hero-slide{position:absolute;inset:0;opacity:0;overflow:hidden;container-type:size;background-size:cover;background-position:center;transform:scale(1.045);transition:opacity 1.2s ease,transform 1.2s ease}
+.hero-slide.is-active{opacity:1;transform:scale(1.01)}
+.hero-slide::after{content:"";position:absolute;inset:0;z-index:3;background:linear-gradient(180deg,rgba(5,10,20,.05),rgba(5,5,10,.08) 55%,rgba(5,5,8,.48))}
+.hero-slide:nth-child(1){background-image:var(--fallback-01)}
+.hero-slide:nth-child(2){background:radial-gradient(circle at 68% 35%,#59486d 0,#282732 35%,#111 72%)}
+.hero-slide:nth-child(3){background:radial-gradient(circle at 30% 45%,#c79b6a 0,#554438 32%,#111 72%)}
+.hero-slide:nth-child(4){background:radial-gradient(circle at 72% 58%,#859487 0,#3d463d 30%,#111 72%)}
+.hero-slide:nth-child(5){background:radial-gradient(circle at 30% 50%,#c68167 0,#59413b 30%,#111 72%)}
+.hero-slide:nth-child(6){background:radial-gradient(circle at 65% 40%,#728ca0 0,#394650 30%,#111 72%)}
+/* Thumbnail or photo, shown while the video loads (or if it can't play). */
+.hero-poster{position:absolute;inset:0;z-index:1;background-size:cover;background-position:center}
+/* Background YouTube player: sized to cover the hero, with extra height so YouTube's title bar is cropped off. */
+.hero-yt{position:absolute;z-index:2;top:50%;left:50%;height:calc(max(100cqh,56.25cqw) + 120px);aspect-ratio:16/9;transform:translate(-50%,-50%);opacity:0;transition:opacity .8s ease;pointer-events:none}
+.hero-yt.is-playing{opacity:1}
+.hero-yt iframe{display:block;width:100%;height:100%;border:0}
+.hero-yt.is-tall{height:calc(100cqh + 120px);aspect-ratio:9/16}
+/* Background video file (from the videos folder). */
+.hero-file{position:absolute;z-index:2;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .8s ease}
+.hero-file.is-playing{opacity:1}
+/* Square and tall videos are shown whole, over a blurred copy of the image. */
+.hero-slide.is-contained .hero-poster{filter:blur(28px) brightness(.7);transform:scale(1.15)}
+.hero-slide.is-contained .hero-file{object-fit:contain}
 .hero:after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.04) 42%,rgba(0,0,0,.38))}
 .hero:before{content:"Ⅱ";position:absolute;z-index:4;right:3vw;bottom:56px;font-size:22px;line-height:1;color:#fff;letter-spacing:-.2em}
 .hero-name{position:absolute;z-index:3;left:50%;top:51%;transform:translate(-50%,-50%);width:max-content;max-width:1100px;margin:0;text-align:center;font-size:clamp(80px,9vw,145px);line-height:.78;font-weight:900;letter-spacing:-.075em;text-transform:uppercase;color:#fff;text-shadow:0 3px 24px rgba(0,0,0,.2)}
 .hero-slide-label{position:absolute;z-index:4;left:var(--gutter);bottom:88px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:#fff}
 .hero-progress{position:absolute;z-index:4;right:3.1vw;bottom:72px;display:flex;flex-direction:column;align-items:center;gap:8px}
 .hero-progress:before{content:"";width:1px;height:30px;background:rgba(255,255,255,.65);margin-bottom:2px}
-.hero-progress i{display:block;width:4px;height:4px;border-radius:50%;background:#fff;opacity:.75}
+.hero-progress i{display:block;width:4px;height:4px;border-radius:50%;background:#fff;opacity:.4;transition:opacity .3s}
+.hero-progress i.is-active{opacity:1}
 
 /* ---------- Work list ---------- */
 #work{background:var(--bg);padding:0}
@@ -85,8 +96,8 @@ a{color:inherit;text-decoration:none}
 .project-media{position:absolute;inset:0;background-position:center;background-size:cover;background-repeat:no-repeat;transition:transform 1.2s cubic-bezier(.2,.7,.2,1),filter 1.2s}
 .project:hover .project-media{transform:scale(1.035);filter:brightness(1.16)}
 
-/* Project tiles — swap a gradient for url('images/your-file.jpg') center/cover no-repeat when you have real images */
-.project-01{background:var(--hero-img) center 42%/cover no-repeat,var(--fallback-01)}
+/* Project tiles — these gradients show until a YouTube thumbnail or photo is set in PROJECTS near the bottom. */
+.project-01{background:var(--fallback-01)}
 .project-02{background:radial-gradient(circle at 65% 42%,#74657a 0,#302d3b 35%,#141517 76%)}
 .project-03{background:radial-gradient(circle at 58% 48%,#d49a71 0,#655044 30%,#151516 76%)}
 .project-04{background:radial-gradient(circle at 62% 45%,#7c8d80 0,#3e4a40 35%,#151615 76%)}
@@ -114,10 +125,11 @@ a{color:inherit;text-decoration:none}
 .case-hero{height:min(58vw,780px);margin:0 var(--gutter);background:var(--tile);overflow:hidden}
 .case-placeholder{height:100%;display:flex;align-items:center;justify-content:center;font-size:clamp(30px,6vw,85px);font-weight:900;color:#55534f}
 .case-hero.case-video{position:relative;height:auto;aspect-ratio:16/9;background:#000}
-.case-hero.case-video.is-vertical{aspect-ratio:9/16;height:min(85vh,760px);width:auto;margin-left:auto;margin-right:auto}
-.case-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.case-hero.case-video.is-tall,.case-hero.case-video.is-square{aspect-ratio:9/16;height:min(85vh,760px);width:auto;margin-left:auto;margin-right:auto}
+.case-hero.case-video.is-square{aspect-ratio:1/1}
+.case-video iframe,.case-video video{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
 .case-video iframe:not([src]){display:none}
-.case-video iframe[src] + .case-placeholder{display:none}
+.case-video iframe[src] + .case-placeholder,.case-video video + .case-placeholder{display:none}
 .case-info{display:grid;grid-template-columns:1fr 2fr;gap:8vw;margin:0 var(--gutter);padding:28px 0;border-bottom:1px solid var(--line)}
 .case-info div{display:flex;flex-direction:column;gap:12px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--muted)}
 .case-info strong{color:var(--ink)}
@@ -163,7 +175,8 @@ a{color:inherit;text-decoration:none}
   .case h1{margin:70px var(--gutter) 40px;font-size:15vw}
   .case-hero{height:70vw}
   .case-hero.case-video{height:auto}
-  .case-hero.case-video.is-vertical{height:min(80vh,150vw)}
+  .case-hero.case-video.is-tall{height:min(80vh,150vw)}
+  .case-hero.case-video.is-square{height:auto;width:auto;margin-left:var(--gutter);margin-right:var(--gutter)}
   .case-info,.case-body{display:block}
   .case-body{padding:70px var(--gutter) 100px}
   .case-info p,.case-body p{font-size:18px;margin-top:25px}
@@ -175,7 +188,7 @@ a{color:inherit;text-decoration:none}
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .hero-slide{animation:none}
+  .hero-slide,.hero-progress i{transition:none}
   .project-media{transition:none}
   .project:hover .project-media{transform:none}
 }
@@ -189,19 +202,14 @@ a{color:inherit;text-decoration:none}
 
 <main id="top">
 <section class="hero">
+  <!-- Slides are filled in by the PROJECTS list near the bottom of this file. -->
   <div class="hero-slideshow" aria-hidden="true">
-    <!-- Slide 1: K-Pop Demon Hunters × Anua. Plays videos/kpop-anua.mp4; shows images/hero.jpg until the video loads (or if it's missing). -->
-    <div class="hero-slide">
-      <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="images/hero.jpg">
-        <source src="videos/kpop-anua.mp4" type="video/mp4">
-      </video>
-    </div>
-    <div class="hero-slide"></div><div class="hero-slide"></div>
+    <div class="hero-slide is-active"></div><div class="hero-slide"></div><div class="hero-slide"></div>
     <div class="hero-slide"></div><div class="hero-slide"></div><div class="hero-slide"></div>
   </div>
   <h1 class="hero-name">KATHERINE<br>TAYLOR</h1>
-  <div class="hero-slide-label" aria-hidden="true">01 / 06 &nbsp; K-POP DEMON HUNTERS × ANUA</div>
-  <div class="hero-progress" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="hero-slide-label" aria-hidden="true">01 / 06&nbsp; K-POP DEMON HUNTERS × ANUA</div>
+  <div class="hero-progress" aria-hidden="true"><i class="is-active"></i><i></i><i></i><i></i><i></i><i></i></div>
 </section>
 
 <section id="work">
@@ -221,7 +229,7 @@ a{color:inherit;text-decoration:none}
     <div class="project-side">
       <span class="project-no">02</span>
       <div class="project-meta"><span>CREATIVE / CAMPAIGN</span><span>THE WALT DISNEY COMPANY · 2025</span></div>
-      <h3 class="project-title">DISNEY PROJECT 01</h3>
+      <h3 class="project-title">CREATE 100</h3>
       <div class="project-cta">VIEW PROJECT</div>
     </div>
     <div class="project-image"><div class="project-media project-02" aria-hidden="true"></div></div>
@@ -231,7 +239,7 @@ a{color:inherit;text-decoration:none}
     <div class="project-side">
       <span class="project-no">03</span>
       <div class="project-meta"><span>CREATIVE / CAMPAIGN</span><span>THE WALT DISNEY COMPANY · 2025</span></div>
-      <h3 class="project-title">DISNEY PROJECT 02</h3>
+      <h3 class="project-title">MUNCHLINGS × PRIMARK</h3>
       <div class="project-cta">VIEW PROJECT</div>
     </div>
     <div class="project-image"><div class="project-media project-03" aria-hidden="true"></div></div>
@@ -288,14 +296,8 @@ a{color:inherit;text-decoration:none}
 <section class="case" id="project-01" role="dialog" aria-modal="true" aria-labelledby="case-01-title">
   <div class="case-top"><span>01 / SOCIAL / CREATIVE</span><a href="#work" class="case-close">BACK TO WORK ↑</a></div>
   <h1 id="case-01-title">K-POP DEMON HUNTERS × ANUA</h1>
-  <!-- YouTube video: replace YOUTUBE_VIDEO_ID with the ID from the link
-       (youtube.com/watch?v=THIS_PART or youtube.com/shorts/THIS_PART).
-       For a vertical Short, change class="case-hero case-video" to class="case-hero case-video is-vertical". -->
-  <div class="case-hero case-video">
-    <iframe data-src="https://www.youtube-nocookie.com/embed/YOUTUBE_VIDEO_ID?rel=0&amp;playsinline=1"
-      title="K-Pop Demon Hunters × Anua campaign video"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <div class="case-hero case-video" data-project="1">
+    <iframe title="K-Pop Demon Hunters × Anua video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     <div class="case-placeholder">K-POP / SOCIAL</div>
   </div>
   <div class="case-info">
@@ -310,8 +312,11 @@ a{color:inherit;text-decoration:none}
 
 <section class="case" id="project-02" role="dialog" aria-modal="true" aria-labelledby="case-02-title">
   <div class="case-top"><span>02 / CREATIVE / CAMPAIGN</span><a href="#work" class="case-close">BACK TO WORK ↑</a></div>
-  <h1 id="case-02-title">DISNEY PROJECT 01</h1>
-  <div class="case-hero"><div class="case-placeholder">DISNEY / CAMPAIGN</div></div>
+  <h1 id="case-02-title">CREATE 100</h1>
+  <div class="case-hero case-video" data-project="2">
+    <iframe title="Create 100 video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <div class="case-placeholder">DISNEY / CAMPAIGN</div>
+  </div>
   <div class="case-info">
     <div><span>Selected work</span><strong>MY ROLE</strong></div>
     <p>Creative / Campaign</p>
@@ -324,8 +329,11 @@ a{color:inherit;text-decoration:none}
 
 <section class="case" id="project-03" role="dialog" aria-modal="true" aria-labelledby="case-03-title">
   <div class="case-top"><span>03 / CREATIVE / CAMPAIGN</span><a href="#work" class="case-close">BACK TO WORK ↑</a></div>
-  <h1 id="case-03-title">DISNEY PROJECT 02</h1>
-  <div class="case-hero"><div class="case-placeholder">DISNEY / CAMPAIGN</div></div>
+  <h1 id="case-03-title">MUNCHLINGS × PRIMARK</h1>
+  <div class="case-hero case-video" data-project="3">
+    <iframe title="Munchlings × Primark video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <div class="case-placeholder">DISNEY / CAMPAIGN</div>
+  </div>
   <div class="case-info">
     <div><span>Selected work</span><strong>MY ROLE</strong></div>
     <p>Creative / Campaign</p>
@@ -339,7 +347,10 @@ a{color:inherit;text-decoration:none}
 <section class="case" id="project-04" role="dialog" aria-modal="true" aria-labelledby="case-04-title">
   <div class="case-top"><span>04 / ACCOUNT EXECUTIVE</span><a href="#work" class="case-close">BACK TO WORK ↑</a></div>
   <h1 id="case-04-title">WESTIN — OWN YOUR MORNINGS</h1>
-  <div class="case-hero"><div class="case-placeholder">WESTIN / CAMPAIGN</div></div>
+  <div class="case-hero case-video" data-project="4">
+    <iframe title="Westin — Own Your Mornings video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <div class="case-placeholder">WESTIN / CAMPAIGN</div>
+  </div>
   <div class="case-info">
     <div><span>BBH Singapore · 2026</span><strong>MY ROLE</strong></div>
     <p>Account Executive · Client / team collaboration · Campaign delivery</p>
@@ -353,7 +364,10 @@ a{color:inherit;text-decoration:none}
 <section class="case" id="project-05" role="dialog" aria-modal="true" aria-labelledby="case-05-title">
   <div class="case-top"><span>05 / CREATIVE / CONCEPT</span><a href="#work" class="case-close">BACK TO WORK ↑</a></div>
   <h1 id="case-05-title">THAI LIGHTS</h1>
-  <div class="case-hero"><div class="case-placeholder">THAI LIGHTS / CONCEPT</div></div>
+  <div class="case-hero case-video" data-project="5">
+    <iframe title="Thai Lights video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <div class="case-placeholder">THAI LIGHTS / CONCEPT</div>
+  </div>
   <div class="case-info">
     <div><span>Concept work</span><strong>MY ROLE</strong></div>
     <p>Creative / Concept</p>
@@ -367,7 +381,10 @@ a{color:inherit;text-decoration:none}
 <section class="case" id="project-06" role="dialog" aria-modal="true" aria-labelledby="case-06-title">
   <div class="case-top"><span>06 / CREATIVE / CONCEPT</span><a href="#work" class="case-close">BACK TO WORK ↑</a></div>
   <h1 id="case-06-title">PIVOTING</h1>
-  <div class="case-hero"><div class="case-placeholder">PIVOTING / CONCEPT</div></div>
+  <div class="case-hero case-video" data-project="6">
+    <iframe title="Pivoting video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <div class="case-placeholder">PIVOTING / CONCEPT</div>
+  </div>
   <div class="case-info">
     <div><span>Concept work</span><strong>MY ROLE</strong></div>
     <p>Creative / Concept</p>
@@ -381,6 +398,108 @@ a{color:inherit;text-decoration:none}
 <footer class="footer"><span>© 2026 Katherine Taylor</span><span>Creative / Account Executive · Singapore</span></footer>
 
 <script>
+/* =====================================================================
+   YOUR VIDEOS AND PHOTOS: this list is the only part you need to edit.
+
+   youtube    A YouTube link (or just its ID) between the quotes, e.g.
+              'https://www.youtube.com/watch?v=abcdEFGhijk'.
+   video      OR a video file you've uploaded to the videos folder, e.g.
+              'videos/my-film.mp4' (keep files under 25 MB). It plays with
+              sound in the case study.
+   heroVideo  Optional short, silent loop for the hero, e.g.
+              'videos/my-film-loop.mp4'. If left empty, "video" is used.
+   start/end  Which seconds loop behind the hero (0 = beginning / end).
+   shape      'wide', 'square' or 'tall'. Square and tall videos are shown
+              whole in the hero, and get a matching player in the case study.
+   image      Optional photo, e.g. 'images/westin.jpg'. Used on the project
+              tile and while the hero video loads. For YouTube videos, the
+              video's thumbnail is used when this is empty.
+   title      The caption at the bottom-left of the hero.
+
+   Projects are numbered in the order they appear on the page.
+   ===================================================================== */
+var PROJECTS = {
+  1: { title: 'K-POP DEMON HUNTERS × ANUA',
+       youtube: 'https://www.youtube.com/watch?v=eP7Fe959rSM',
+       video: '', heroVideo: '', start: 0, end: 0, shape: 'wide', image: '' },
+
+  2: { title: 'CREATE 100',
+       youtube: '',
+       video: 'videos/create-100.mp4', heroVideo: 'videos/create-100-loop.mp4',
+       start: 0, end: 0, shape: 'wide', image: 'images/create-100.jpg' },
+
+  3: { title: 'MUNCHLINGS × PRIMARK',
+       youtube: '',
+       video: 'videos/munchlings.mp4', heroVideo: 'videos/munchlings-loop.mp4',
+       start: 0, end: 0, shape: 'square', image: 'images/munchlings.jpg' },
+
+  4: { title: 'WESTIN — OWN YOUR MORNINGS',
+       youtube: 'https://www.youtube.com/watch?v=59156sZlc5A',
+       video: '', heroVideo: '', start: 0, end: 0, shape: 'wide', image: '' },
+
+  5: { title: 'THAI LIGHTS', youtube: '', video: '', heroVideo: '', start: 0, end: 0, shape: 'wide', image: '' },
+  6: { title: 'PIVOTING',    youtube: '', video: '', heroVideo: '', start: 0, end: 0, shape: 'wide', image: '' }
+};
+var SLIDE_SECONDS = 5; // how long each hero slide stays on screen
+
+
+/* ---------- Helpers (no need to edit below this line) ---------- */
+(function(){
+  function ytId(v){
+    v = String(v || '').trim();
+    var m = v.match(/(?:[?&]v=|youtu\.be\/|\/shorts\/|\/embed\/|\/live\/)([\w-]{11})/);
+    if (m) return m[1];
+    return /^[\w-]{11}$/.test(v) ? v : '';
+  }
+  Object.keys(PROJECTS).forEach(function(k){ PROJECTS[k].id = ytId(PROJECTS[k].youtube); });
+})();
+
+// Calls back with the photo, or the best YouTube thumbnail available.
+function posterFor(p, cb){
+  if (!p) return;
+  if (p.image) return cb(p.image);
+  if (!p.id) return;
+  var hi = 'https://i.ytimg.com/vi/' + p.id + '/maxresdefault.jpg';
+  var lo = 'https://i.ytimg.com/vi/' + p.id + '/hqdefault.jpg';
+  var img = new Image();
+  img.onload = function(){ cb(img.naturalWidth > 120 ? hi : lo); }; // YouTube returns a tiny placeholder when there's no HD thumbnail
+  img.onerror = function(){ cb(lo); };
+  img.src = hi;
+}
+
+// Project tiles and case-study players.
+(function(){
+  document.querySelectorAll('.project-media').forEach(function(tile){
+    var m = tile.className.match(/project-0(\d)/);
+    if (!m) return;
+    posterFor(PROJECTS[m[1]], function(url){
+      tile.style.backgroundImage = 'url("' + url + '")';
+      tile.style.backgroundSize = 'cover';
+      tile.style.backgroundPosition = 'center 28%'; // faces usually sit in the upper part of the frame
+    });
+  });
+  document.querySelectorAll('.case-video[data-project]').forEach(function(box){
+    var p = PROJECTS[box.getAttribute('data-project')];
+    if (!p) return;
+    var shape = (p.video || p.id) ? p.shape : '';
+    if (shape === 'tall' || shape === 'square') box.classList.add('is-' + shape);
+    if (p.video){
+      // Swap the YouTube frame for a video player with sound and controls.
+      var v = document.createElement('video');
+      v.controls = true;
+      v.playsInline = true;
+      v.preload = 'none';
+      if (p.image) v.poster = p.image;
+      v.setAttribute('aria-label', box.querySelector('iframe').title);
+      box.querySelector('iframe').replaceWith(v);
+    } else if (!p.id && p.image){
+      var ph = box.querySelector('.case-placeholder');
+      ph.style.background = 'url("' + p.image + '") center/cover no-repeat';
+      ph.textContent = '';
+    }
+  });
+})();
+
 /* Case study overlays.
    Each project link opens its overlay and adds #project-0X to the URL,
    so links like yoursite.com/#project-03 open straight to that project
@@ -406,15 +525,26 @@ a{color:inherit;text-decoration:none}
       document.body.classList.remove('modal-open');
       if (lastTrigger){ lastTrigger.focus({preventScroll:true}); lastTrigger = null; }
     }
+    document.dispatchEvent(new Event('casechange'));
   }
 
-  // YouTube players only load when their case study opens, and are removed on close
-  // so the audio stops. Placeholder IDs are skipped.
+  // The case-study player loads when its overlay opens and is removed on close, so the sound stops.
   function setVideos(panel, on){
-    panel.querySelectorAll('iframe[data-src]').forEach(function(f){
-      var src = f.getAttribute('data-src');
-      if (on && src.indexOf('YOUTUBE_VIDEO_ID') === -1){ if (!f.getAttribute('src')) f.setAttribute('src', src); }
-      else f.removeAttribute('src');
+    panel.querySelectorAll('.case-video[data-project]').forEach(function(box){
+      var p = PROJECTS[box.getAttribute('data-project')] || {};
+      var v = box.querySelector('video');
+      if (v){
+        if (on){ if (!v.getAttribute('src')) v.src = p.video; }
+        else v.pause();
+        return;
+      }
+      var f = box.querySelector('iframe');
+      if (!f) return;
+      if (on && p.id){
+        if (!f.getAttribute('src')) f.setAttribute('src', 'https://www.youtube-nocookie.com/embed/' + p.id + '?rel=0&playsinline=1');
+      } else {
+        f.removeAttribute('src');
+      }
     });
   }
 
@@ -455,26 +585,161 @@ a{color:inherit;text-decoration:none}
   update();
 })();
 
-/* Hero caption — stays in step with the 5-second slide fades. */
+/* Hero slideshow with silent YouTube backgrounds.
+   Only the slide on screen plays. Videos pause when the hero is scrolled away,
+   the tab is hidden or a case study is open. With "reduce motion" or data saver
+   switched on, the slideshow stays on slide 1 and shows thumbnails only. */
 (function(){
-  var labels = [
-    "K-POP DEMON HUNTERS × ANUA",
-    "DISNEY PROJECT 01",
-    "DISNEY PROJECT 02",
-    "WESTIN — OWN YOUR MORNINGS",
-    "THAI LIGHTS",
-    "PIVOTING"
-  ];
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-    document.querySelectorAll('.hero-video').forEach(function(v){ v.removeAttribute('autoplay'); v.pause(); });
-    return;
+  var slides = [].slice.call(document.querySelectorAll('.hero-slide'));
+  var dots = [].slice.call(document.querySelectorAll('.hero-progress i'));
+  var label = document.querySelector('.hero-slide-label');
+  var hero = document.querySelector('.hero');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var saveData = !!(navigator.connection && navigator.connection.saveData);
+  var useVideo = !reduce && !saveData;
+  var current = 0, players = {}, heroVisible = true, apiRequested = false, apiQueue = [];
+
+  slides.forEach(function(slide, i){
+    var p = PROJECTS[i + 1];
+    if (p && (p.heroVideo || p.video || p.id) && (p.shape === 'tall' || p.shape === 'square')) slide.classList.add('is-contained');
+    posterFor(p, function(url){
+      var d = document.createElement('div');
+      d.className = 'hero-poster';
+      d.style.backgroundImage = 'url("' + url + '")';
+      slide.appendChild(d);
+    });
+  });
+
+  function withApi(cb){
+    if (window.YT && window.YT.Player) return cb();
+    apiQueue.push(cb);
+    if (apiRequested) return;
+    apiRequested = true;
+    var prev = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = function(){
+      if (prev) prev();
+      var q = apiQueue; apiQueue = [];
+      q.forEach(function(f){ f(); });
+    };
+    var tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(tag);
   }
-  var el = document.querySelector('.hero-slide-label');
-  var n = 0;
+
+  // A video file from the videos folder, wrapped so it behaves like a YouTube player below.
+  function ensureFile(i, p){
+    var rec = players[i] = { ready: true };
+    var v = rec.wrap = document.createElement('video');
+    v.className = 'hero-file';
+    v.muted = true;
+    v.defaultMuted = true;
+    v.playsInline = true;
+    v.setAttribute('muted', '');
+    v.setAttribute('playsinline', '');
+    v.preload = 'auto';
+    v.src = p.heroVideo || p.video;
+    v.addEventListener('loadedmetadata', function(){ if (p.start) v.currentTime = p.start; });
+    v.addEventListener('playing', function(){ v.classList.add('is-playing'); });
+    v.addEventListener('ended', function(){ v.currentTime = p.start || 0; v.play().catch(function(){}); });
+    v.addEventListener('error', function(){ rec.failed = true; v.remove(); });
+    rec.player = {
+      playVideo: function(){ var r = v.play(); if (r && r.catch) r.catch(function(){}); },
+      pauseVideo: function(){ v.pause(); },
+      getCurrentTime: function(){ return v.currentTime; },
+      seekTo: function(t){ v.currentTime = t; }
+    };
+    slides[i].appendChild(v);
+  }
+
+  function ensure(i){
+    var p = PROJECTS[i + 1];
+    if (!useVideo || !p || players[i]) return;
+    if (p.heroVideo || p.video) return ensureFile(i, p);
+    if (!p.id) return;
+    var rec = players[i] = { ready: false };
+    var wrap = rec.wrap = document.createElement('div');
+    wrap.className = 'hero-yt' + (p.shape === 'tall' ? ' is-tall' : '');
+    var mount = document.createElement('div');
+    wrap.appendChild(mount);
+    slides[i].appendChild(wrap);
+
+    var vars = { autoplay: 0, mute: 1, controls: 0, disablekb: 1, fs: 0, iv_load_policy: 3, playsinline: 1, rel: 0, start: p.start || 0 };
+    if (p.end) vars.end = p.end;
+    if (/^https?:/.test(location.origin)) vars.origin = location.origin;
+
+    withApi(function(){
+      rec.player = new YT.Player(mount, {
+        host: 'https://www.youtube-nocookie.com',
+        videoId: p.id,
+        playerVars: vars,
+        events: {
+          onReady: function(e){ rec.ready = true; e.target.mute(); update(); },
+          onStateChange: function(e){
+            if (e.data === YT.PlayerState.PLAYING){
+              clearTimeout(rec.reveal);
+              rec.reveal = setTimeout(function(){ wrap.classList.add('is-playing'); }, 1200); // wait for YouTube's title to fade
+            } else if (e.data === YT.PlayerState.ENDED){
+              e.target.seekTo(p.start || 0, true);
+              e.target.playVideo();
+            } else if (e.data === YT.PlayerState.PAUSED){
+              clearTimeout(rec.reveal);
+            }
+          },
+          onError: function(){ rec.failed = true; wrap.remove(); } // e.g. embedding disabled: the thumbnail stays
+        }
+      });
+    });
+  }
+
+  function update(){
+    var canPlay = useVideo && heroVisible && !document.hidden && !document.body.classList.contains('modal-open');
+    Object.keys(players).forEach(function(k){
+      var rec = players[k], i = +k;
+      if (!rec.ready || rec.failed) return;
+      clearTimeout(rec.pauseTimer);
+      if (canPlay && i === current){
+        rec.player.playVideo();
+      } else {
+        // Let the slide finish fading out before pausing, then hide the player.
+        rec.pauseTimer = setTimeout(function(){
+          rec.player.pauseVideo();
+          rec.wrap.classList.remove('is-playing');
+        }, canPlay ? 1300 : 0);
+      }
+    });
+  }
+
+  function show(i){
+    current = i;
+    slides.forEach(function(s, j){ s.classList.toggle('is-active', j === i); });
+    dots.forEach(function(d, j){ d.classList.toggle('is-active', j === i); });
+    var p = PROJECTS[i + 1] || {};
+    label.textContent = String(i + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0') + '\u00a0 ' + (p.title || '');
+    ensure(i);
+    ensure((i + 1) % slides.length); // get the next video ready
+    update();
+  }
+
+  if ('IntersectionObserver' in window){
+    new IntersectionObserver(function(entries){
+      heroVisible = entries[0].isIntersecting;
+      update();
+    }).observe(hero);
+  }
+  document.addEventListener('visibilitychange', update);
+  document.addEventListener('casechange', update);
+
+  // Keep clips inside their start/end seconds (YouTube only honours "end" on the first play).
   setInterval(function(){
-    n = (n + 1) % labels.length;
-    el.innerHTML = String(n + 1).padStart(2, '0') + ' / 06 &nbsp; ' + labels[n];
-  }, 5000);
+    var rec = players[current], p = PROJECTS[current + 1];
+    if (!rec || !rec.ready || rec.failed || !p || !p.end || typeof rec.player.getCurrentTime !== 'function') return;
+    if (rec.player.getCurrentTime() >= p.end) rec.player.seekTo(p.start || 0, true);
+  }, 250);
+
+  show(0);
+  if (!reduce){
+    setInterval(function(){ show((current + 1) % slides.length); }, SLIDE_SECONDS * 1000);
+  }
 })();
 </script>
 </body>

@@ -5,9 +5,6 @@
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: DENY
 
-# Short cache so photos and videos you add or swap later show up quickly.
+# Short cache so photos you add or swap later show up quickly.
 /images/*
-  Cache-Control: public, max-age=3600
-
-/videos/*
   Cache-Control: public, max-age=3600
