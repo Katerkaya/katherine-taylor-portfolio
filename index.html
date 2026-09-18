@@ -129,8 +129,18 @@ a{color:inherit;text-decoration:none}
 .case-hero.case-video.is-tall,.case-hero.case-video.is-square{aspect-ratio:9/16;height:min(85vh,760px);width:auto;margin-left:auto;margin-right:auto}
 .case-hero.case-video.is-square{aspect-ratio:1/1}
 .case-video iframe,.case-video video{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+/* Image panel: columns of varying heights, tidy on every width */
+.case-mosaic{margin:0 var(--gutter) 10px;column-count:3;column-gap:18px}
+.case-mosaic figure{break-inside:avoid;margin:0 0 18px}
+.case-mosaic img{display:block;width:100%;height:auto;background:var(--tile)}
+@media (max-width:1100px){.case-mosaic{column-count:2}}
 .case-video iframe:not([src]){display:none}
-.case-video iframe[src] + .case-placeholder,.case-video video + .case-placeholder{display:none}
+.case-facade{position:absolute;inset:0;z-index:1;width:100%;height:100%;padding:0;border:0;cursor:pointer;background:#000 var(--img) center/cover no-repeat}
+.case-facade[hidden]{display:none}
+.case-facade::after{content:"";position:absolute;left:50%;top:50%;width:84px;height:84px;margin:-42px 0 0 -42px;border-radius:50%;background:rgba(16,17,18,.72) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 7l9 5-9 5z' fill='%23f4f2ed'/%3E%3C/svg%3E") center/40px no-repeat;transition:transform .2s}
+.case-facade:hover::after,.case-facade:focus-visible::after{transform:scale(1.08)}
+.case-facade:not([hidden]) ~ .case-placeholder{display:none}
+.case-video iframe[src] ~ .case-placeholder,.case-video video ~ .case-placeholder{display:none}
 .case-info{display:grid;grid-template-columns:1fr 2fr;gap:8vw;margin:0 var(--gutter);padding:28px 0;border-bottom:1px solid var(--line)}
 .case-info div{display:flex;flex-direction:column;gap:12px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--muted)}
 .case-info strong{color:var(--ink)}
@@ -229,6 +239,8 @@ a{color:inherit;text-decoration:none}
   .case-section .case-label{margin-bottom:22px}
   .case-press a{grid-template-columns:1fr;gap:6px;padding:18px 0}
   .case-press .title{font-size:18px}
+  .case-mosaic{column-count:1;column-gap:12px;margin-bottom:6px}
+  .case-mosaic figure{margin-bottom:12px}
   .case-gallery{padding-bottom:60px}
   .marquee img,.marquee video{height:260px}
   .project-media.has-img{background-image:var(--img-m,var(--img))}
@@ -314,8 +326,8 @@ a{color:inherit;text-decoration:none}
   <a class="project" href="#project-05">
     <div class="project-side">
       <span class="project-no">05</span>
-      <div class="project-meta"><span>CREATIVE / CONCEPT</span><span>CONCEPT WORK</span></div>
-      <h3 class="project-title">THAI LIGHTS</h3>
+      <div class="project-meta"><span>PHOTOGRAPHY</span><span>PERSONAL PROJECT</span></div>
+      <h3 class="project-title">ROGUE</h3>
       <div class="project-cta">VIEW PROJECT</div>
     </div>
     <div class="project-image"><div class="project-media project-05" aria-hidden="true"></div></div>
@@ -353,16 +365,51 @@ a{color:inherit;text-decoration:none}
   <div class="case-top"><span>01 / SOCIAL / CREATIVE</span><a href="#work" class="case-close">BACK TO WORK ↑</a></div>
   <h1 id="case-01-title">K-POP DEMON HUNTERS × ANUA</h1>
   <div class="case-hero case-video" data-project="1">
-    <iframe title="K-Pop Demon Hunters × Anua video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe title="Gonna Be Glowin’, the K-Pop Demon Hunters × Anua campaign film" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     <div class="case-placeholder">K-POP / SOCIAL</div>
   </div>
   <div class="case-info">
     <div><span>BBH Singapore · 2026</span><strong>MY ROLE</strong></div>
-    <p>Social Ideation · Creative Ideation · Copywriting · Influencer Research</p>
+    <p>Social Listening · Creative Ideation · Social Execution</p>
   </div>
+
   <div class="case-body">
     <div class="case-label">CASE STUDY</div>
-    <p>Project narrative, thinking, process and selected work will live here. The final version will use the real campaign assets and clearly separate Katherine's contribution from the final campaign.</p>
+    <div class="case-text">
+      <p class="lead">Fans already knew how HUNTR/X shine on stage. Gonna Be Glowin’ gave them a way to carry that glow into everyday life, with Anua.</p>
+      <p>Building on the Anua × KPop Demon Hunters skincare collection, the global campaign centred on a K-pop-style film by music video director Kylie Kang. Everyday moments with the products are cut together with scenes from the movie, and the film is packed with Easter eggs for fans, from HUNTR/X’s manager to the film’s three ahjummas. From there, the story moved into social through creator partnerships and fan activations.</p>
+      <p>On the social side, the work started with the fandom itself: listening to how fans talk about the film, its characters and its lore, and digging deep into the KPop Demon Hunters IP so every idea felt true to the world they love. That groundwork shaped the creative thinking and, in turn, the social content that brought the campaign to the community.</p>
+      <div class="case-roles">
+        <div><h3>Social Listening</h3><p>Tracking fan conversation around KPop Demon Hunters to understand what the community cares about and how they talk about it.</p></div>
+        <div><h3>IP Research</h3><p>Researching the film’s characters, lore and details, so the work spoke the fandom’s language and stayed true to the IP.</p></div>
+        <div><h3>Creative Ideation</h3><p>Contributing ideas for how the campaign could live on social and reward the fans who know the film inside out.</p></div>
+        <div><h3>Social Execution</h3><p>Supporting the social content and activations as the campaign rolled out.</p></div>
+      </div>
+      <a class="case-link" href="https://www.youtube.com/watch?v=eP7Fe959rSM" target="_blank" rel="noopener">WATCH THE FILM ON YOUTUBE ↗</a>
+    </div>
+  </div>
+
+  <div class="case-gallery">
+    <div class="case-label">GALLERY</div>
+    <div class="marquee">
+      <div class="marquee-track" data-seconds="32">
+        <figure><img src="images/kpop/huntrix.jpg" width="1493" height="840" loading="lazy" alt="HUNTR/X looking at a phone together"><figcaption>HUNTR/X</figcaption></figure>
+        <figure><img src="images/kpop/gonna-be-glowin.jpg" width="1536" height="840" loading="lazy" alt="Dancers on a bridge, one holding an Anua sunscreen"><figcaption>Gonna Be Glowin’</figcaption></figure>
+        <figure><img src="images/kpop/billboard.jpg" width="1493" height="840" loading="lazy" alt="A HUNTR/X billboard with a dancer on a scissor lift"><figcaption>The HUNTR/X billboard</figcaption></figure>
+        <figure><img src="images/kpop/ahjummas.jpg" width="1493" height="840" loading="lazy" alt="Three ahjummas cheering"><figcaption>The ahjummas</figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  <div class="case-section">
+    <div class="case-label">IN THE PRESS</div>
+    <ul class="case-press">
+      <li><a href="https://campaignbriefasia.com/2026/06/16/anua-and-netflixs-kpop-demon-hunters-launch-global-campaign-via-bbh-singapore/" target="_blank" rel="noopener"><span class="src">Campaign Brief Asia</span><span class="title">Anua and KPop Demon Hunters go global</span><span class="date">Jun 2026</span></a></li>
+      <li><a href="https://www.marketing-interactive.com/slaying-demons-anua-wants-you-glowing-while-youre-at-it" target="_blank" rel="noopener"><span class="src">Marketing-Interactive</span><span class="title">Glowing while slaying demons</span><span class="date">Jun 2026</span></a></li>
+      <li><a href="https://roastbrief.us/k-beauty-brand-anua-expands-its-kpop-demon-hunters-collaboration-with-new-global-campaign-by-bbh-singapore/" target="_blank" rel="noopener"><span class="src">Roastbrief</span><span class="title">Anua expands its KPop Demon Hunters collaboration</span><span class="date">Jun 2026</span></a></li>
+      <li><a href="https://marketech-apac.com/anua-expands-kpop-demon-hunters-partnership-with-global-gonna-be-glowin-campaign/" target="_blank" rel="noopener"><span class="src">Marketech APAC</span><span class="title">A global push to deepen fandom engagement</span><span class="date">Jun 2026</span></a></li>
+      <li><a href="https://www.brandinginasia.com/anua-expands-kpop-demon-hunters-partnership-with-global-gonna-be-glowin-campaign/" target="_blank" rel="noopener"><span class="src">Branding in Asia</span><span class="title">Inside the Gonna Be Glowin’ campaign</span><span class="date">Jun 2026</span></a></li>
+    </ul>
   </div>
 </section>
 
@@ -540,20 +587,29 @@ a{color:inherit;text-decoration:none}
 </section>
 
 <section class="case" id="project-05" role="dialog" aria-modal="true" aria-labelledby="case-05-title">
-  <div class="case-top"><span>05 / CREATIVE / CONCEPT</span><a href="#work" class="case-close">BACK TO WORK ↑</a></div>
-  <h1 id="case-05-title">THAI LIGHTS</h1>
-  <div class="case-hero case-video" data-project="5">
-    <iframe title="Thai Lights video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    <div class="case-placeholder">THAI LIGHTS / CONCEPT</div>
+  <div class="case-top"><span>05 / PHOTOGRAPHY</span><a href="#work" class="case-close">BACK TO WORK ↑</a></div>
+  <h1 id="case-05-title">ROGUE</h1>
+  <div class="case-mosaic">
+    <figure><img src="images/rogue/hero.jpg" width="1600" height="1063" loading="lazy" alt="A masked fire performer wrapped in sparks and smoke"></figure>
+    <figure><img src="images/rogue/smoke.jpg" width="1200" height="797" loading="lazy" alt="A performer lighting up, smoke catching the light"></figure>
+    <figure><img src="images/rogue/fire-trail.jpg" width="1200" height="797" loading="lazy" alt="A trail of fire arcing above a crouching performer"></figure>
+    <figure><img src="images/rogue/kneeling.jpg" width="900" height="1355" loading="lazy" alt="A performer kneeling in smoke, lit by falling sparks"></figure>
+    <figure><img src="images/rogue/sparks-wide.jpg" width="1200" height="797" loading="lazy" alt="Sparks raining around a performer on the sand"></figure>
+    <figure><img src="images/rogue/spark-fan.jpg" width="1400" height="930" loading="lazy" alt="A performer spinning fire, sparks filling the night sky"></figure>
   </div>
   <div class="case-info">
-    <div><span>Concept work</span><strong>MY ROLE</strong></div>
-    <p>Creative / Concept</p>
+    <div><span>Personal project</span><strong>MY ROLE</strong></div>
+    <p>Photography</p>
   </div>
+
   <div class="case-body">
     <div class="case-label">CASE STUDY</div>
-    <p>Project narrative, thinking, process and selected work will live here. The final version will use the real campaign assets and clearly separate Katherine's contribution from the final campaign.</p>
+    <div class="case-text">
+      <p class="lead">A personal series shot after dark, chasing the moment fire turns into a drawing in the air.</p>
+      <p>Photographed at night on the sand, the set follows a fire performer through spins, sparks and smoke. Long exposures let each movement leave its own trail of light, so the frames catch what the eye can&rsquo;t hold: sparks suspended mid-air, smoke lit from within, a figure appearing and disappearing in the glow.</p>
+    </div>
   </div>
+
 </section>
 
 <section class="case" id="project-06" role="dialog" aria-modal="true" aria-labelledby="case-06-title">
@@ -596,7 +652,8 @@ a{color:inherit;text-decoration:none}
               video's thumbnail is used when this is empty.
    imageMobile    Optional taller version of the image for phones.
    imagePosition  Optional focus point for the tile crop, e.g. 'center 30%'.
-   poster     Optional still for the case-study video player.
+   poster     Optional still for the case-study player. For YouTube films it
+              shows as a cover with a play button until it's clicked.
    title      The caption at the bottom-left of the hero.
 
    Projects are numbered in the order they appear on the page.
@@ -604,7 +661,8 @@ a{color:inherit;text-decoration:none}
 var PROJECTS = {
   1: { title: 'K-POP DEMON HUNTERS × ANUA',
        youtube: 'https://www.youtube.com/watch?v=eP7Fe959rSM',
-       video: '', heroVideo: '', start: 0, end: 0, shape: 'wide', image: '' },
+       video: '', heroVideo: '', start: 0, end: 0, shape: 'wide',
+       image: '' },   // empty = the video's own YouTube thumbnail
 
   2: { title: 'CREATE 100',
        youtube: '',
@@ -631,7 +689,8 @@ var PROJECTS = {
        imageMobile: 'images/westin-tall.jpg',
        imagePosition: 'center 50%' },
 
-  5: { title: 'THAI LIGHTS', youtube: '', video: '', heroVideo: '', start: 0, end: 0, shape: 'wide', image: '' },
+  5: { title: 'ROGUE', youtube: '', video: '', heroVideo: '', start: 0, end: 0, shape: 'wide',
+       image: 'images/rogue.jpg', imageMobile: 'images/rogue-tall.jpg', imagePosition: 'center 45%' },
   6: { title: 'PIVOTING',    youtube: '', video: '', heroVideo: '', start: 0, end: 0, shape: 'wide', image: '' }
 };
 var SLIDE_SECONDS = 5; // how long each hero slide stays on screen
@@ -719,6 +778,20 @@ function setImage(el, url, mobileUrl){
       if (p.poster || p.image) v.poster = p.poster || p.image;
       v.setAttribute('aria-label', box.querySelector('iframe').title);
       box.querySelector('iframe').replaceWith(v);
+    } else if (p.id && p.poster && !p.embed){
+      // Cover image with a play button; the YouTube player loads when it's clicked.
+      var cover = document.createElement('button');
+      cover.type = 'button';
+      cover.className = 'case-facade';
+      cover.setAttribute('aria-label', 'Play ' + box.querySelector('iframe').title);
+      cover.style.setProperty('--img', 'url("' + p.poster + '")');
+      cover.addEventListener('click', function(){
+        var f = box.querySelector('iframe');
+        f.setAttribute('src', 'https://www.youtube-nocookie.com/embed/' + p.id + '?rel=0&playsinline=1&autoplay=1');
+        cover.hidden = true;
+        f.focus();
+      });
+      box.insertBefore(cover, box.querySelector('.case-placeholder'));
     } else if (!p.id && p.image){
       var ph = box.querySelector('.case-placeholder');
       ph.style.background = 'url("' + p.image + '") center/cover no-repeat';
@@ -773,6 +846,11 @@ function setImage(el, url, mobileUrl){
       }
       var f = box.querySelector('iframe');
       if (!f) return;
+      var cover = box.querySelector('.case-facade');
+      if (cover){
+        if (!on){ f.removeAttribute('src'); cover.hidden = false; }
+        return;
+      }
       if (on && p.embed){
         if (!f.getAttribute('src')) f.setAttribute('src', p.embed);
       } else if (on && p.id){

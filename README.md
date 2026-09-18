@@ -27,7 +27,7 @@ Current setup:
 
 | # | Project | Source |
 |---|---------|--------|
-| 1 | K-Pop Demon Hunters × Anua | YouTube |
+| 1 | K-Pop Demon Hunters × Anua | YouTube (hero loop + case-study film); tile art is a temporary still |
 | 2 | Create 100 | `videos/create-100.mp4` (hero: `create-100-loop.mp4`, a footage-only cut) |
 | 3 | Disney Munchlings × Primark | `videos/munchlings-reel.mp4` (hero: `munchlings-reel-loop.mp4`, tall); `munchlings-square.mp4` plays in the gallery |
 | 4 | Westin — Own Your Mornings | YouTube (hero loop, seconds 2–24, and the case-study film); link to the film on LBB |
@@ -37,7 +37,7 @@ Notes:
 - Background videos don't play when the site is opened straight from your computer (YouTube), or
   when visitors have "reduce motion" or data saver switched on. The image or thumbnail shows instead.
 
-## Case study pages (Create 100, Munchlings, Westin)
+## Case study pages (K-Pop Demon Hunters, Create 100, Munchlings, Westin)
 
 The case study (`<section class="case" id="project-02">`) has extra sections: a numbers strip, the case study
 text, an auto-scrolling **gallery** (images in `images/create-100/`), a **featuring** list and **in the press** links.
