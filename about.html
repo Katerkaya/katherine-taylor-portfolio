@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>About — Katherine Taylor</title>
+<meta name="description" content="Katherine Taylor is a British creative, artist and storyteller based in Singapore, and an Account Executive at BBH Singapore.">
+<meta name="theme-color" content="#101112">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="About — Katherine Taylor">
+<meta property="og:description" content="A multi-disciplinary creative working across ideas, social, campaigns and client collaboration.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23101112'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial,Helvetica,sans-serif' font-weight='900' font-size='30' fill='%23f4f2ed'%3EKT%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#101112;
+  --ink:#f4f2ed;
+  --muted:#9d9da0;
+  --line:rgba(255,255,255,.18);
+  --sans:Arial,Helvetica,sans-serif;
+  --gutter:3.05vw;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{background:var(--bg);color:var(--ink)}
+body{margin:0;font-family:var(--sans);line-height:1.35}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--ink);color:var(--bg)}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+
+/* Nav — matches the home page */
+.nav{position:fixed;z-index:50;top:0;left:0;width:100%;display:grid;grid-template-columns:1fr auto;align-items:center;padding:20px var(--gutter);background:rgba(16,17,18,.92);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);color:#fff;font-size:10px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
+.nav a{font-weight:700}
+.nav .left{justify-self:start;font-size:14px;letter-spacing:.08em;font-weight:800}
+.nav .right{justify-self:end;display:flex;gap:30px}
+.nav .right a[aria-current]{opacity:.55}
+
+.page{padding:150px var(--gutter) 0}
+.page h1{margin:0 0 70px;font-size:clamp(65px,9vw,140px);line-height:.82;letter-spacing:-.075em;font-weight:900}
+
+.bio{display:grid;grid-template-columns:1fr 2fr;gap:8vw;padding-bottom:90px;border-bottom:1px solid var(--line)}
+.bio .label{font-size:10px;letter-spacing:.13em;text-transform:uppercase;font-weight:900}
+.bio p{margin:0;max-width:700px;font-size:22px;color:#c6c2b9}
+.bio p + p{margin-top:26px}
+.bio p.lead{color:var(--ink);font-size:28px;letter-spacing:-.02em;line-height:1.2}
+
+.facts{display:grid;grid-template-columns:1fr 2fr;gap:8vw;padding:60px 0 90px}
+.facts dl{margin:0;border-top:1px solid var(--line);max-width:700px}
+.facts div{display:grid;grid-template-columns:150px 1fr;gap:24px;padding:20px 0;border-bottom:1px solid var(--line)}
+.facts dt{margin:0;padding-top:5px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:900}
+.facts dd{margin:0;font-size:19px;line-height:1.4;color:#c6c2b9}
+
+.contact{margin:0 calc(var(--gutter) * -1);padding:125px var(--gutter) 110px;background:var(--ink);color:var(--bg)}
+.contact h2{margin:0 0 8vw;max-width:1200px;font-size:clamp(70px,9vw,135px);line-height:.82;letter-spacing:-.075em;font-weight:900}
+.contact-links{display:flex;flex-wrap:wrap;gap:34px}
+.contact a{font-size:11px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;border-bottom:2px solid currentColor;padding-bottom:8px}
+.contact :focus-visible{outline-color:var(--bg)}
+
+.footer{margin:0 calc(var(--gutter) * -1);padding:25px 3vw;display:flex;justify-content:space-between;color:var(--muted);font-size:9px;letter-spacing:.12em;text-transform:uppercase}
+
+@media (max-width:700px){
+  :root{--gutter:5vw}
+  .nav{padding:14px var(--gutter)}
+  .nav .left{font-size:12px}
+  .nav .right{gap:17px}
+  .page{padding-top:110px}
+  .page h1{margin-bottom:45px;font-size:18vw}
+  .bio,.facts{display:block;padding-bottom:50px}
+  .bio p{font-size:18px;margin-top:22px}
+  .bio p.lead{font-size:22px}
+  .bio .label,.facts .label{margin-bottom:20px}
+  .facts{padding-top:40px}
+  .facts div{grid-template-columns:1fr;gap:8px;padding:16px 0}
+  .facts dt{padding-top:0}
+  .facts dd{font-size:17px}
+  .contact{padding:100px var(--gutter)}
+  .contact h2{font-size:16vw}
+  .footer{display:block;padding:20px var(--gutter)}
+  .footer span{display:block;margin-bottom:8px}
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a class="left" href="index.html">KATHERINE TAYLOR</a>
+  <div class="right"><a href="index.html#work">WORK</a><a href="about.html" aria-current="page">ABOUT</a><a href="#contact">CONTACT</a></div>
+</nav>
+
+<main class="page">
+  <h1>ABOUT</h1>
+
+  <div class="bio">
+    <div class="label">BIO</div>
+    <div>
+      <p class="lead">Katherine Taylor is a British multi-disciplinary creative, artist and storyteller based in Singapore.</p>
+      <p>She studied Arts and Sciences (BASc) at University College London, an interdisciplinary degree that combined her passion for media and design with psychology and data science. She is a fluent bilingual in English and Mandarin Chinese.</p>
+      <p>Design, art and creativity have been a big part of Katherine&rsquo;s upbringing. Ever since she was little, she&rsquo;s always had a paper and pen (most times more than one) on standby.</p>
+      <p>That might mean putting together marketing material, coming up with original character designs, or capturing digital content for short-form videos and social reels. Exploring the diversity of storytelling platforms continuously intrigues her, and it inspires her creative approach to every project.</p>
+      <p>Her experience includes creative campaigns and production at The Walt Disney Company, within the Disney Consumer Products division in London. That work has spanned global campaigns such as Create 100, initiatives like Marvel x The Prince&rsquo;s Trust, and brand collaborations including Primark x Munchlings and Pleasing x Fantasia.</p>
+      <p>She has also worked in marketing at Gensler, the world&rsquo;s leading architectural design firm. Based in the company&rsquo;s APAC and Middle East Hub in Singapore, she helped produce marketing collateral for clients and content for social media.</p>
+      <p>Alongside her campaign work, she has experience in photography, interactive media and documentary film from her university years. She also works professionally across the Adobe Creative Suite, including Photoshop, Premiere Pro, Illustrator and InDesign, bringing innovative and captivating visual storytelling to life.</p>
+    </div>
+  </div>
+
+  <div class="facts">
+    <div class="label">AT A GLANCE</div>
+    <dl>
+      <div><dt>Now</dt><dd>Bartle Bogle Hegarty (BBH) Singapore</dd></div>
+      <div><dt>Previously</dt><dd>The Walt Disney Company, Disney Consumer Products, London &middot; Gensler, Singapore</dd></div>
+      <div><dt>Education</dt><dd>BASc Arts and Sciences, University College London</dd></div>
+      <div><dt>Disciplines</dt><dd>Creative ideation &middot; Social &middot; Campaign delivery &middot; Client collaboration &middot; Photography &middot; Interactive media &middot; Documentary film</dd></div>
+      <div><dt>Tools</dt><dd>Photoshop &middot; Premiere Pro &middot; Illustrator &middot; InDesign</dd></div>
+      <div><dt>Languages</dt><dd>English &middot; Mandarin Chinese</dd></div>
+    </dl>
+  </div>
+
+  <section class="contact" id="contact">
+    <h2>LET'S MAKE<br>SOMETHING<br>WORTH TALKING<br>ABOUT.</h2>
+    <div class="contact-links">
+      <a href="mailto:katherine.taylor282@gmail.com">EMAIL ME ↗</a>
+      <a href="https://www.linkedin.com/in/katherine-emy-taylor" target="_blank" rel="noopener">LINKEDIN ↗</a>
+    </div>
+  </section>
+
+  <footer class="footer"><span>© 2026 Katherine Taylor</span><span>Creative / Account Executive · Singapore</span></footer>
+</main>
+</body>
+</html>

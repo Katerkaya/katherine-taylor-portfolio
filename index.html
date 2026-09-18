@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Katherine Taylor — Creative / Account Executive</title>
-<meta name="description" content="Katherine Taylor is a Creative / Account Executive in Singapore working across ideas, social, campaigns and client collaboration.">
+<meta name="description" content="Katherine Taylor is a multi-disciplinary creative and Account Executive at BBH Singapore, working across ideas, social, campaigns and client collaboration.">
 <meta name="theme-color" content="#101112">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Katherine Taylor — Creative / Account Executive">
@@ -109,11 +109,14 @@ a{color:inherit;text-decoration:none}
 .about{border-top:1px solid var(--line);padding:140px var(--gutter);display:grid;grid-template-columns:31% 69%}
 .about h2{margin:0;font-size:70px;line-height:.84;letter-spacing:-.06em;font-weight:900}
 .about p{margin:0;font-size:25px;max-width:720px;letter-spacing:-.02em}
+.about p + p{margin-top:24px;font-size:20px;color:#c6c2b9}
+.about-link{display:inline-block;margin-top:40px;font-size:11px;font-weight:900;letter-spacing:.13em;border-bottom:2px solid currentColor;padding-bottom:8px}
 .about small{display:block;margin-top:35px;color:var(--muted);font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:800}
 
 /* ---------- Contact ---------- */
 .contact{padding:125px var(--gutter) 110px;background:var(--ink);color:var(--bg)}
 .contact h2{margin:0 0 8vw;max-width:1200px;font-size:clamp(70px,9vw,135px);line-height:.82;letter-spacing:-.075em;font-weight:900}
+.contact-links{display:flex;flex-wrap:wrap;gap:34px}
 .contact a{font-size:11px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;border-bottom:2px solid currentColor;padding-bottom:8px}
 .contact :focus-visible{outline-color:var(--bg)}
 
@@ -265,7 +268,7 @@ a{color:inherit;text-decoration:none}
 <body>
 <nav class="nav">
   <a class="left" href="#top">KATHERINE TAYLOR</a>
-  <div class="right"><a href="#work">WORK</a><a href="#about">ABOUT</a><a href="#contact">CONTACT</a></div>
+  <div class="right"><a href="#work">WORK</a><a href="about.html">ABOUT</a><a href="#contact">CONTACT</a></div>
 </nav>
 
 <main id="top">
@@ -345,18 +348,19 @@ a{color:inherit;text-decoration:none}
 </section>
 
 <section class="about" id="about">
-  <h2>Creative<br>thinker.<br>Social<br>native.</h2>
+  <h2>Multi-<br>disciplinary<br>creative.<br>Commercial<br>mind.</h2>
   <div>
-    <p>Creative / Account Executive working across ideas, social, campaigns and client collaboration.</p>
-    <small>BBH Singapore · Creative &amp; Social · Account Experience</small>
-    <small>Creative ideation · Social ideation · Copy · Influencer research · Client collaboration · Campaign delivery</small>
+    <p>A British creative, artist and storyteller based in Singapore, working across ideas, social, campaigns and client collaboration.</p>
+    <a class="about-link" href="about.html">MORE ABOUT ME ↗</a>
   </div>
 </section>
 
 <section class="contact" id="contact">
   <h2>LET'S MAKE<br>SOMETHING<br>WORTH TALKING<br>ABOUT.</h2>
-  <!-- TODO: replace with your real email address -->
-  <a href="mailto:hello@example.com">GET IN TOUCH ↗</a>
+  <div class="contact-links">
+    <a href="mailto:katherine.taylor282@gmail.com">EMAIL ME ↗</a>
+    <a href="https://www.linkedin.com/in/katherine-emy-taylor" target="_blank" rel="noopener">LINKEDIN ↗</a>
+  </div>
 </section>
 </main>
 
@@ -642,6 +646,8 @@ a{color:inherit;text-decoration:none}
               sound in the case study.
    embed      Optional player link from another site (e.g. LBB) for the case
               study. The hero still uses "youtube" or "heroVideo".
+   heroZoom   Optional zoom for the hero loop (e.g. 1.14) to crop a logo
+              or caption out of the frame.
    heroVideo  Optional short, silent loop for the hero, e.g.
               'videos/my-film-loop.mp4'. If left empty, "video" is used.
    start/end  Which seconds loop behind the hero (0 = beginning / end).
@@ -682,15 +688,16 @@ var PROJECTS = {
        poster: 'images/munchlings/reel-poster.jpg' },
 
   4: { title: 'WESTIN — OWN YOUR MORNINGS',
-       youtube: 'https://www.youtube.com/watch?v=59156sZlc5A',    // hero loop + case-study film
+       youtube: 'https://www.youtube.com/watch?v=59156sZlc5A',    // fallback if the link below stops working
        embed: '',
-       video: '', heroVideo: '', start: 2, end: 24, shape: 'wide',
+       video: 'https://video.adsoftheworld.com/9njg834b0xdwmyc7pqpr3957x9s2.mp4',
+       heroVideo: '', start: 2, end: 24.3, shape: 'wide', heroZoom: 1.14,
        image: 'images/westin.jpg',
        imageMobile: 'images/westin-tall.jpg',
        imagePosition: 'center 50%' },
 
   5: { title: 'ROGUE', youtube: '', video: '', heroVideo: '', start: 0, end: 0, shape: 'wide',
-       image: 'images/rogue.jpg', imageMobile: 'images/rogue-tall.jpg', imagePosition: 'center 45%' },
+       image: 'images/rogue.jpg', imageMobile: 'images/rogue-tall.jpg', imagePosition: 'center top' },
   6: { title: 'PIVOTING',    youtube: '', video: '', heroVideo: '', start: 0, end: 0, shape: 'wide', image: '' }
 };
 var SLIDE_SECONDS = 5; // how long each hero slide stays on screen
@@ -774,7 +781,7 @@ function setImage(el, url, mobileUrl){
       var v = document.createElement('video');
       v.controls = true;
       v.playsInline = true;
-      v.preload = 'none';
+      v.preload = 'metadata';
       if (p.poster || p.image) v.poster = p.poster || p.image;
       v.setAttribute('aria-label', box.querySelector('iframe').title);
       box.querySelector('iframe').replaceWith(v);
@@ -951,6 +958,7 @@ function setImage(el, url, mobileUrl){
     v.setAttribute('playsinline', '');
     v.preload = 'auto';
     v.src = p.heroVideo || p.video;
+    if (p.heroZoom) v.style.transform = 'scale(' + p.heroZoom + ')';
     v.addEventListener('loadedmetadata', function(){ if (p.start) v.currentTime = p.start; });
     v.addEventListener('playing', function(){ v.classList.add('is-playing'); });
     v.addEventListener('ended', function(){ v.currentTime = p.start || 0; v.play().catch(function(){}); });

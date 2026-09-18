@@ -4,6 +4,7 @@ A single-page static site. No build step, no dependencies.
 
 ```
 index.html        the whole site (HTML, CSS and JS in one file)
+about.html        the About page (bio, experience, contact)
 404.html          shown for any address that doesn't exist
 images/           optional photos
 _headers          security + caching headers
@@ -30,7 +31,7 @@ Current setup:
 | 1 | K-Pop Demon Hunters × Anua | YouTube (hero loop + case-study film); tile art is a temporary still |
 | 2 | Create 100 | `videos/create-100.mp4` (hero: `create-100-loop.mp4`, a footage-only cut) |
 | 3 | Disney Munchlings × Primark | `videos/munchlings-reel.mp4` (hero: `munchlings-reel-loop.mp4`, tall); `munchlings-square.mp4` plays in the gallery |
-| 4 | Westin — Own Your Mornings | YouTube (hero loop, seconds 2–24, and the case-study film); link to the film on LBB |
+| 4 | Westin — Own Your Mornings | the film hosted by Ads of the World (`video`), hero loop trimmed to seconds 2–24.3; YouTube kept as a fallback |
 
 Notes:
 - YouTube videos must allow embedding, otherwise the thumbnail shows instead.
