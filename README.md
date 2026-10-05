@@ -28,10 +28,13 @@ Current setup:
 
 | # | Project | Source |
 |---|---------|--------|
-| 1 | K-Pop Demon Hunters × Anua | YouTube (hero loop + case-study film); tile art is a temporary still |
+| 1 | K-Pop Demon Hunters × Anua | YouTube (hero loop + case-study film) |
 | 2 | Create 100 | `videos/create-100.mp4` (hero: `create-100-loop.mp4`, a footage-only cut) |
 | 3 | Disney Munchlings × Primark | `videos/munchlings-reel.mp4` (hero: `munchlings-reel-loop.mp4`, tall); `munchlings-square.mp4` plays in the gallery |
 | 4 | Westin — Own Your Mornings | the film hosted by Ads of the World (`video`), hero loop trimmed to seconds 2–24.3; YouTube kept as a fallback |
+| 5 | Rogue | photo panel, personal project |
+| 6 | Disney Home | YouTube Short (hero loop + case-study film); stills in the gallery |
+| 7 | Digital Sketches | photo panel, personal project |
 
 Notes:
 - YouTube videos must allow embedding, otherwise the thumbnail shows instead.
